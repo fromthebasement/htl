@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.appfuse.Constants;
-import org.appfuse.model.Role;
-import org.appfuse.model.User;
-import org.appfuse.service.RoleManager;
-import org.appfuse.service.UserExistsException;
-import org.appfuse.service.UserManager;
+import com.fromthebasement.Constants;
+import com.fromthebasement.model.Role;
+import com.fromthebasement.model.User;
+import com.fromthebasement.service.RoleManager;
+import com.fromthebasement.service.UserExistsException;
+import com.fromthebasement.service.UserManager;
 import com.fromthebasement.webapp.util.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;

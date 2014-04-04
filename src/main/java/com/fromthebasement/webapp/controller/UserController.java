@@ -1,8 +1,8 @@
 package com.fromthebasement.webapp.controller;
 
-import org.appfuse.Constants;
-import org.appfuse.dao.SearchException;
-import org.appfuse.service.UserManager;
+import com.fromthebasement.Constants;
+import com.fromthebasement.dao.SearchException;
+import com.fromthebasement.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;

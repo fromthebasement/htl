@@ -1,8 +1,8 @@
 package com.fromthebasement.webapp.controller;
 
-import org.appfuse.Constants;
-import org.appfuse.model.Address;
-import org.appfuse.model.User;
+import com.fromthebasement.Constants;
+import com.fromthebasement.model.Address;
+import com.fromthebasement.model.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
