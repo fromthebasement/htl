@@ -22,6 +22,7 @@
         </jaxrs:features>
         <jaxrs:serviceBeans>
             <ref bean="userManager"/>
+            <ref bean="personManager"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider"/>

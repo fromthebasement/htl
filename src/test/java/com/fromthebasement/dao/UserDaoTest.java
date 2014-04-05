@@ -6,22 +6,25 @@ import com.fromthebasement.model.Role;
 import com.fromthebasement.model.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.orm.ObjectRetrievalFailureException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class UserDaoTest extends BaseDaoTestCase {
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Autowired
     private UserDao dao;
     @Autowired
     private RoleDao rdao;
 
-    @Test(expected=DataAccessException.class)
+    @Test(expected=ObjectRetrievalFailureException.class)
     public void testGetUserInvalid() throws Exception {
-        // should throw DataAccessException
         dao.get(1000L);
     }
 
@@ -42,35 +45,24 @@ public class UserDaoTest extends BaseDaoTestCase {
         log.debug("password: " + password);
     }
 
-    @Test(expected=DataIntegrityViolationException.class)
+    @Test
     public void testUpdateUser() throws Exception {
         User user = dao.get(-1L);
 
         Address address = user.getAddress();
         address.setAddress("new address");
 
-        dao.saveUser(user);
-        flush();
+        dao.save(user);
 
         user = dao.get(-1L);
-        assertEquals(address, user.getAddress());
+        assertEquals(user.getAddress(), address);
         assertEquals("new address", user.getAddress().getAddress());
 
-        // verify that violation occurs when adding new user with same username
-        User user2 = new User();
-        user2.setAddress(user.getAddress());
-        user2.setConfirmPassword(user.getConfirmPassword());
-        user2.setEmail(user.getEmail());
-        user2.setFirstName(user.getFirstName());
-        user2.setLastName(user.getLastName());
-        user2.setPassword(user.getPassword());
-        user2.setPasswordHint(user.getPasswordHint());
-        user2.setRoles(user.getRoles());
-        user2.setUsername(user.getUsername());
-        user2.setWebsite(user.getWebsite());
+        //verify that violation occurs when adding new user with same username
+        user.setId(null);
 
         // should throw DataIntegrityViolationException
-        dao.saveUser(user2);
+        dao.save(user);
     }
 
     @Test
@@ -80,29 +72,23 @@ public class UserDaoTest extends BaseDaoTestCase {
 
         Role role = rdao.getRoleByName(Constants.ADMIN_ROLE);
         user.addRole(role);
-        dao.saveUser(user);
-        flush();
+        dao.save(user);
 
-        user = dao.get(-1L);
         assertEquals(2, user.getRoles().size());
 
         //add the same role twice - should result in no additional role
         user.addRole(role);
-        dao.saveUser(user);
-        flush();
+        dao.save(user);
 
-        user = dao.get(-1L);
         assertEquals("more than 2 roles", 2, user.getRoles().size());
 
         user.getRoles().remove(role);
-        dao.saveUser(user);
-        flush();
+        dao.save(user);
 
-        user = dao.get(-1L);
         assertEquals(1, user.getRoles().size());
     }
 
-    @Test(expected=DataAccessException.class)
+    @Test(expected=ObjectRetrievalFailureException.class)
     public void testAddAndRemoveUser() throws Exception {
         User user = new User("testuser");
         user.setPassword("testpass");
@@ -121,17 +107,14 @@ public class UserDaoTest extends BaseDaoTestCase {
         assertNotNull(role.getId());
         user.addRole(role);
 
-        user = dao.saveUser(user);
-        flush();
+        user = dao.save(user);
 
         assertNotNull(user.getId());
-        user = dao.get(user.getId());
         assertEquals("testpass", user.getPassword());
 
-        dao.remove(user);
-        flush();
+        dao.remove(user.getId());
 
-        // should throw DataAccessException
+        // should throw EntityNotFoundException
         dao.get(user.getId());
     }
 
@@ -147,27 +130,16 @@ public class UserDaoTest extends BaseDaoTestCase {
         assertFalse(b);
     }
 
+
     @Test
-    public void testUserSearch() throws Exception {
-        // reindex all the data
+    public void testSearch() throws Exception {
+        // reindexAll all the data
         dao.reindex();
 
-        List<User> found = dao.search("Matt");
-        assertEquals(1, found.size());
-        User user = found.get(0);
-        assertEquals("Matt", user.getFirstName());
+        List<User> found = dao.search("*");
+        assertEquals(3, found.size());
 
-        // test mirroring
-        user = dao.get(-2L);
-        user.setFirstName("MattX");
-        dao.saveUser(user);
-        flush();
-        flushSearchIndexes();
-
-        // now verify it is reflected in the index
-        found = dao.search("MattX");
+        found = dao.search("Tomcat");
         assertEquals(1, found.size());
-        user = found.get(0);
-        assertEquals("MattX", user.getFirstName());
     }
 }

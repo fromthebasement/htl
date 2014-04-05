@@ -14,7 +14,7 @@
     <!-- Add new DAOs here -->
 
     <!-- Add new Managers here -->
-    
+
     <!-- Configure and Alternative PasswordTokenManager -->
 	<!-- <bean id="passwordTokenManager" class="com.fromthebasement.service.impl.PersistentPasswordTokenManagerImpl" autowire="default" /> -->
 </beans>

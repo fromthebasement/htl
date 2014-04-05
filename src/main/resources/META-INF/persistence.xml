@@ -5,6 +5,9 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>com.fromthebasement.model.User</class>
         <class>com.fromthebasement.model.Role</class>
+        <properties>
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+        </properties>
     </persistence-unit>
 
     <!-- WARNING: This file's file original source is at web/common/src/main/resources/META-INF. The

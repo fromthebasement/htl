@@ -51,7 +51,7 @@
                     <!-- Fix annotation detection issue for Java 7. Thanks Shred! -->
                     <!-- http://www.shredzone.de/cilla/page/352/hibernate3-maven-plugin-fails-with-java-17.html -->
                     <componentProperties>
-                        <implementation>annotationconfiguration</implementation>
+                        <implementation>jpaconfiguration</implementation>
                     </componentProperties>
                     <genericCore>${amp.genericCore}</genericCore>
                     <fullSource>${amp.fullSource}</fullSource>
@@ -82,9 +82,7 @@
                     <components>
                         <component>
                             <name>hbm2ddl</name>
-                            <implementation>annotationconfiguration</implementation>
-                            <!-- Use 'jpaconfiguration' if you're using JPA. -->
-                            <!--<implementation>jpaconfiguration</implementation>-->
+                            <implementation>jpaconfiguration</implementation>
                         </component>
                     </components>
                     <componentProperties>
@@ -293,6 +291,7 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- Dependencies calculated by AppFuse when running full-source plugin -->
     <!-- Dependencies calculated by AppFuse when running full-source plugin -->
     <dependencies>
         <dependency>
@@ -521,6 +520,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.entitymanager.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.java-persistence</groupId>
@@ -970,7 +974,7 @@
         <!-- Application settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <copyright.year>2014</copyright.year>
-        <dao.framework>hibernate</dao.framework>
+        <dao.framework>jpa</dao.framework>
         <web.framework>spring</web.framework>
         <amp.genericCore>true</amp.genericCore>
         <amp.fullSource>true</amp.fullSource>
@@ -1019,6 +1023,10 @@
         <jdbc.url>jdbc:mysql://localhost/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password/>
+
+        <!-- Properties calculated by AppFuse when running full-source plugin -->
+        <hibernate.entitymanager.version>4.2.7.Final</hibernate.entitymanager.version>
+
 
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <aspectj.version>1.7.4</aspectj.version>
