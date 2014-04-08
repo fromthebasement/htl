@@ -6,7 +6,11 @@
         'transitions' : '../lib/durandal/js/transitions',
         'knockout': '../lib/knockout/knockout-3.1.0',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
-        'jquery': '../lib/jquery/jquery-2.1.0'
+        'jquery': '../lib/jquery/jquery-2.1.0',
+        'string-formatter': '../lib/string-formatter/string',
+        'knockout-mapping': '../lib/knockout-mapping/knockout.mapping-2.4.1',
+        'knockout-bootstrap': 'bootstraps/knockout-bootstrap',
+        'rest': 'services/rest'
     },
     shim: {
         'bootstrap': {
@@ -16,12 +20,20 @@
     }
 });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],  function (system, app, viewLocator) {
+define(function(require, exports, module) {
+    require('bootstrap');
+    require('string-formatter');
+    require('knockout-bootstrap');
+
+    var system = require('durandal/system'),
+        app = require('durandal/app'),
+        viewLocator = require('durandal/viewLocator');
+
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");
 
-    app.title = 'Durandal Starter Kit';
+    app.title = 'Hometown League';
 
     app.configurePlugins({
         router:true,
