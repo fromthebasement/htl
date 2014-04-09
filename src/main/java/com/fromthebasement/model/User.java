@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.search.annotations.Analyze;
@@ -273,10 +274,12 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.username = username;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @JsonProperty
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }

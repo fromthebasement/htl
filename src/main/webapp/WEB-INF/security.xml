@@ -11,18 +11,25 @@
     <http pattern="/assets/**" security="none"/>
     <http pattern="/htl/**" security="none"/>
 
-    <http auto-config="true">
-        <intercept-url pattern="/app/admin/**" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/app/passwordHint*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
-        <intercept-url pattern="/app/requestRecoveryToken*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER" />
-        <intercept-url pattern="/app/updatePassword*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER" />
-        <intercept-url pattern="/app/signup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
-        <intercept-url pattern="/app/**" access="ROLE_ADMIN,ROLE_USER"/>
-        <form-login login-page="/login" authentication-failure-url="/login?error=true" login-processing-url="/j_security_check"/>
-        <remember-me user-service-ref="userDao" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
+    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
+        <intercept-url pattern="/services/api/login**" access="permitAll"/>
+        <intercept-url pattern="/services/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+
+        <form-login
+                authentication-success-handler-ref="mySuccessHandler"
+                authentication-failure-handler-ref="myFailureHandler"
+                />
+
+        <logout />
     </http>
 
-    <authentication-manager>
+    <beans:bean id="mySuccessHandler"
+                class="com.fromthebasement.security.MySavedRequestAwareAuthenticationSuccessHandler"/>
+    <beans:bean id="myFailureHandler"
+                class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
+
+
+    <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDao">
             <password-encoder ref="passwordEncoder">
             </password-encoder>

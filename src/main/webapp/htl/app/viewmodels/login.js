@@ -5,7 +5,7 @@ define(function(require, exports, module) {
         rest = require('rest');
 
     var model = {
-            userName: "",
+            username: "",
             password: ""
         },
         _viewModel = ko.mapping.fromJS(model),

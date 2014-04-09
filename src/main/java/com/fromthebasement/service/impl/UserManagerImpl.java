@@ -137,7 +137,7 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
             }
 
             // If password was changed (or new user), encrypt it
-            if (passwordChanged) {
+            if (passwordChanged && StringUtils.isNotEmpty(user.getPassword())) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
         } else {

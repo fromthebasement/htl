@@ -195,7 +195,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>/ht;/index.html</welcome-file>
+        <welcome-file>/htl/index.html</welcome-file>
     </welcome-file-list>
 
     <error-page>

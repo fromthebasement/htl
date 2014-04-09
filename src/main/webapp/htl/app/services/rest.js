@@ -3,7 +3,7 @@ define(function(require, exports, module) {
 
     var user = {
         _urls: {
-            'login' : '/api/1.0/login'
+            'login' : '/services/api/login.json'
         },
 
         'login': function(settings){
