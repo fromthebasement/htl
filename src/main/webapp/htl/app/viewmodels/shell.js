@@ -6,9 +6,9 @@
         router: router,
         activate: function () {
             router.map([
-                { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
+                { route: '', title:'Standings', moduleId: 'viewmodels/standings', nav: true },
                 { route: 'login(:/redirect)', title:'Login', moduleId: 'viewmodels/login', nav: false },
-                { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true }
+                { route: 'survey', moduleId: 'viewmodels/survey', nav: true }
             ]).buildNavigationModel();
 
             return router.activate().then( function(){
