@@ -48,5 +48,14 @@ define(function(require, exports, module) {
 
         //Show the app by setting the root view model for our application with a transition.
         app.setRoot('viewmodels/shell', 'entrance');
+
+        // Collapse bootstrap nav bar when selecting an option from the nav
+        $(document).on('click', '.nav > li > .collapse-on-select', function(){
+            if($('.navbar-toggle').css('display') !='none'){
+                setTimeout(function(){
+                    $(".navbar-toggle").trigger( "click" );
+                },0);
+            }
+        });
     });
 });
