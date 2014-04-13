@@ -8,7 +8,7 @@
             router.map([
                 { route: '', title:'Standings', moduleId: 'viewmodels/standings', nav: true },
                 { route: 'login(:/redirect)', title:'Login', moduleId: 'viewmodels/login', nav: false },
-                { route: 'survey', moduleId: 'viewmodels/survey', nav: true }
+                { route: 'survey', title:'Questions', moduleId: 'viewmodels/survey', nav: true }
             ]).buildNavigationModel();
 
             return router.activate().then( function(){

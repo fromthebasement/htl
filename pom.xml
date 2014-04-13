@@ -1020,9 +1020,9 @@
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
         <jdbc.version>5.1.27</jdbc.version>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-        <jdbc.url>jdbc:mysql://localhost/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
-        <jdbc.username>root</jdbc.username>
-        <jdbc.password/>
+        <jdbc.url>jdbc:mysql://devdb.cnhlgiojpn6r.us-west-2.rds.amazonaws.com/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
+        <jdbc.username>cabrera</jdbc.username>
+        <jdbc.password>Baz00ka$</jdbc.password>
 
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <hibernate.entitymanager.version>4.2.7.Final</hibernate.entitymanager.version>
