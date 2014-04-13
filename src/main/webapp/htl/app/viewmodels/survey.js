@@ -5,6 +5,7 @@
     //See the "welcome" module for an example of function export.
 
     return {
-        displayName: 'Survey'
+        displayName: 'Questions',
+        link: "https://www.surveymonkey.com/s/2CTHVWC"
     };
 });

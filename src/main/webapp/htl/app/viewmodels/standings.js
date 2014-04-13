@@ -2,6 +2,25 @@
     var ctor = function () {
         this.displayName = 'We\'re winning, bitches!';
         this.description = 'Playing HTL makes you smarter, richer, and more attractive.';
+
+        var standings = [
+            { name: "Andy", score: "0" },
+            { name: "Becky", score: "0" },
+            { name: "Dan", score: "0" },
+            { name: "Grant", score: "0" },
+            { name: "John", score: "0" },
+            { name: "Kevin", score: "0" },
+            { name: "Matt", score: "0" },
+            { name: "Ryan M.", score: "0" },
+            { name: "Ryan S.", score: "0" },
+            { name: "Todd", score: "0" }
+        ];
+
+        this.sortedStandings = ko.computed(function(){
+            return standings.sort(function(a,b){
+                return b.score - a.score;
+            });
+        })
     };
 
     //Note: This module exports a function. That means that you, the developer, can create multiple instances.

@@ -1,4 +1,18 @@
-﻿<section>
-    <h2 data-bind="html:displayName"></h2>
-    <blockquote data-bind="html:description"></blockquote>
+﻿<section style="padding-right: 15px; padding-left: 15px; padding-top: 15px;">
+    <table class="reference" style="width: 300px;">
+        <tbody>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+            <!-- ko foreach: sortedStandings -->
+                <tr>
+                    <td data-bind="text: $index()+1"></td>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: score"></td>
+                </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
 </section>
