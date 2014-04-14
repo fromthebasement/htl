@@ -10,22 +10,29 @@
         }
 
         var league1standings = [
-            { name: "Andy", score: "0" },
-            { name: "Becky", score: "0" },
-            { name: "Dan", score: "0" },
+            { name: "Andy", score: "6" },
+            { name: "Becky", score: "4" },
+            { name: "Dan", score: "4" },
             { name: "Grant", score: "0" },
+            { name: "Jeff", score: "2" },
             { name: "John", score: "0" },
-            { name: "Kevin", score: "0" },
-            { name: "Matt", score: "0" },
-            { name: "Ryan M.", score: "0" },
-            { name: "Ryan S.", score: "0" },
-            { name: "Todd", score: "0" }
+            { name: "Kevin", score: "4" },
+            { name: "Matt", score: "4" },
+            { name: "Ryan S.", score: "4" },
+            { name: "Todd", score: "4" }
         ];
 
         var league2standings = [
+            { name: "Eliott", score: "3" },
             { name: "Isabel", score: "0" },
-            { name: "Merrell", score: "0" },
-            { name: "Nolan", score: "0" }
+            { name: "Jack", score: "0" },
+            { name: "Jim", score: "0" },
+            { name: "Kelly", score: "5" },
+            { name: "Maya", score: "0" },
+            { name: "Merrell", score: "6" },
+            { name: "Nolan", score: "1" },
+            { name: "Ryan", score: "4" }
+
         ];
 
         this.sortedStandings = [
