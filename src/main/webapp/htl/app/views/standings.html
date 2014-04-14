@@ -1,18 +1,20 @@
-﻿<section style="padding-right: 15px; padding-left: 15px; padding-top: 15px;">
-    <table class="reference" style="width: 300px;">
-        <tbody>
-            <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Score</th>
-            </tr>
-            <!-- ko foreach: sortedStandings -->
+﻿<section style="padding-right: 15px; padding-left: 15px;">
+    <!-- ko foreach: sortedStandings-->
+        <table class="reference" style="width: 300px; margin-top: 15px; margin-bottom: 15px;">
+            <tbody>
                 <tr>
-                    <td data-bind="text: $index()+1"></td>
-                    <td data-bind="text: name"></td>
-                    <td data-bind="text: score"></td>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
                 </tr>
-            <!-- /ko -->
-        </tbody>
-    </table>
+                <!-- ko foreach: $data -->
+                    <tr>
+                        <td data-bind="text: $index()+1"></td>
+                        <td data-bind="text: name"></td>
+                        <td data-bind="text: score"></td>
+                    </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    <!-- /ko -->
 </section>

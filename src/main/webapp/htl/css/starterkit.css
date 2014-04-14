@@ -26,7 +26,15 @@
 
 .page-host {
     position: relative;
-    top: 51px !important;
+    top: 151px !important;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.navbar .htl-banner {
+    height: 100px;
+    width: 100%;
+    background:url("/images/htl-banner.jpg") repeat-x;
 }
 
 .navbar-fixed-top .navbar-inner {
@@ -38,14 +46,9 @@
     font-size: 18px
 }
 
-.navbar {
-    padding-left: 15px;
+.navbar > .container-fluid {
     padding-right: 15px;
-}
-
-.container-fluid {
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-left: 15px;
 }
 
 .loader {
