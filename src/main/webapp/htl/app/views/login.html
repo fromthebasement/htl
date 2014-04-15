@@ -1,11 +1,16 @@
-<section>
-    <h1 class="logo hide-text">Hometown League</h1>
-    <div class="error" data-bind="text: error"></div>
+<section style="padding: 15px;">
     <form data-bind="submit:login" class="loginForm">
         <fieldset>
-            <input type="text" data-bind="value:username" placeholder="Email"/>
-            <input type="password" data-bind="value:password" placeholder="Password"/>
+            <div style="padding-bottom: 5px;">
+                <input type="text" data-bind="value:username" placeholder="Email"/>
+            </div>
+            <div style="padding-bottom: 5px;">
+                <input type="password" data-bind="value:password" placeholder="Password"/>
+            </div>
         </fieldset>
-        <button class="btn-primary" data-role="button">Sign In</button>
+        <div>
+            <button class="btn-primary" data-role="button">Sign In</button>
+        </div>
     </form>
+    <div class="error" data-bind="text: error"></div>
 </section>

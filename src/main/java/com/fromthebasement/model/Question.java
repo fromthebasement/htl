@@ -2,21 +2,15 @@ package com.fromthebasement.model;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
-import java.util.List;
-
 /**
- * Created by jeffginn on 4/13/14.
+ * Created by jeffginn on 4/14/14.
  */
 @Entity
-public class Survey extends BaseObject {
-    private Long            id;
-    private String          name;
-    private Tattoo          tattoo;
-    private DateTime        endTime;
-    private List<Question>  questions;
+public class Question extends BaseObject {
+    private Long    id;
+    private String  name;
+    private Tattoo  tattoo;
+    private Survey  survey;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +31,6 @@ public class Survey extends BaseObject {
         this.name = name;
     }
 
-    @Embedded
     public Tattoo getTattoo() {
         return tattoo;
     }
@@ -46,22 +39,14 @@ public class Survey extends BaseObject {
         this.tattoo = tattoo;
     }
 
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    public DateTime getEndTime() {
-        return endTime;
+    @ManyToOne
+    @JoinColumn(name="survey_id")
+    public Survey getSurvey() {
+        return survey;
     }
 
-    public void setEndTime(DateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    @OneToMany(mappedBy="survey", targetEntity = Question.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
 
     @Override
@@ -69,10 +54,10 @@ public class Survey extends BaseObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Survey survey = (Survey) o;
+        Question question = (Question) o;
 
-        if (name != null ? !name.equals(survey.name) : survey.name != null) return false;
-        if (tattoo != null ? !tattoo.equals(survey.tattoo) : survey.tattoo != null) return false;
+        if (name != null ? !name.equals(question.name) : question.name != null) return false;
+        if (tattoo != null ? !tattoo.equals(question.tattoo) : question.tattoo != null) return false;
 
         return true;
     }
@@ -86,7 +71,7 @@ public class Survey extends BaseObject {
 
     @Override
     public String toString() {
-        return "Survey{" +
+        return "Question{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tattoo=" + tattoo +

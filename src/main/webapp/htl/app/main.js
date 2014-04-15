@@ -10,7 +10,8 @@
         'string-formatter': '../lib/string-formatter/string',
         'knockout-mapping': '../lib/knockout-mapping/knockout.mapping-2.4.1',
         'knockout-bootstrap': 'bootstraps/knockout-bootstrap',
-        'rest': 'services/rest'
+        'rest': 'services/rest',
+        'appViewModel': 'viewmodels/appViewModel'
     },
     shim: {
         'bootstrap': {
@@ -50,7 +51,7 @@ define(function(require, exports, module) {
         app.setRoot('viewmodels/shell', 'entrance');
 
         // Collapse bootstrap nav bar when selecting an option from the nav
-        $(document).on('click', '.nav > li > .collapse-on-select', function(){
+        $(document).on('click', '.collapse-on-select', function(){
             if($('.navbar-toggle').css('display') !='none'){
                 setTimeout(function(){
                     $(".navbar-toggle").trigger( "click" );

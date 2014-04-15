@@ -23,6 +23,7 @@
         <jaxrs:serviceBeans>
             <ref bean="userManager"/>
             <ref bean="personManager"/>
+            <ref bean="surveyManager"/>
             <ref bean="loginService"/>
             <ref bean="logoutService"/>
         </jaxrs:serviceBeans>

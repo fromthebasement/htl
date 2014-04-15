@@ -700,6 +700,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.core</artifactId>
+            <version>3.1.0.GA</version>
+        </dependency>
     </dependencies>
 
     <reporting>
@@ -1020,9 +1030,16 @@
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
         <jdbc.version>5.1.27</jdbc.version>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-        <jdbc.url>jdbc:mysql://devdb.cnhlgiojpn6r.us-west-2.rds.amazonaws.com/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
-        <jdbc.username>cabrera</jdbc.username>
-        <jdbc.password>Baz00ka$</jdbc.password>
+
+        <!-- AWS RDS -->
+        <!--<jdbc.url>jdbc:mysql://devdb.cnhlgiojpn6r.us-west-2.rds.amazonaws.com/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>-->
+        <!--<jdbc.username>cabrera</jdbc.username>-->
+        <!--<jdbc.password>Baz00ka$</jdbc.password>-->
+
+        <!-- Local -->
+        <jdbc.url>jdbc:mysql://localhost/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
+        <jdbc.username>root</jdbc.username>
+        <jdbc.password/>
 
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <hibernate.entitymanager.version>4.2.7.Final</hibernate.entitymanager.version>
