@@ -7,19 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.persistence.Version;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -70,6 +58,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private boolean accountExpired;
     private boolean accountLocked;
     private boolean credentialsExpired;
+    private Set<SurveyFeed> surveyFeeds = new HashSet<SurveyFeed>();
 
     /**
      * Default constructor - creates a new instance with no values set.
@@ -334,6 +323,30 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
     public void setCredentialsExpired(boolean credentialsExpired) {
         this.credentialsExpired = credentialsExpired;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @JoinTable(
+            name = "user_survey_feed",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = @JoinColumn(name = "survey_feed_id")
+    )
+    public Set<SurveyFeed> getSurveyFeeds() {
+        return surveyFeeds;
+    }
+
+    /**
+     * Adds a survey feed for the user
+     *
+     * @param surveyFeed the fully instantiated surevy feed
+     */
+    public void addSurveyFeed(SurveyFeed surveyFeed) {
+        getSurveyFeeds().add(surveyFeed);
+    }
+
+    public void setSurveyFeeds(Set<SurveyFeed> surveyFeeds) {
+        this.surveyFeeds = surveyFeeds;
     }
 
     /**

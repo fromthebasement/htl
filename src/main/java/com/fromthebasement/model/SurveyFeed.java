@@ -1,23 +1,22 @@
 package com.fromthebasement.model;
 
-import javax.persistence.*;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Created by jeffginn on 4/13/14.
+ * Created by jeffginn on 4/15/14.
  */
 @Entity
-public class Survey extends BaseObject {
+public class SurveyFeed extends BaseObject {
     private Long            id;
     private String          name;
     private Tattoo          tattoo;
-    private DateTime        endTime;
-    private SurveyFeed      surveyFeed;
-    private List<Question>  questions;
+    private List<Survey>    surveys;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,32 +46,13 @@ public class Survey extends BaseObject {
         this.tattoo = tattoo;
     }
 
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    public DateTime getEndTime() {
-        return endTime;
+    @OneToMany(mappedBy="surveyFeed", targetEntity = Survey.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    public List<Survey> getSurveys() {
+        return surveys;
     }
 
-    public void setEndTime(DateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="surveyFeed_id")
-    public SurveyFeed getSurveyFeed() {
-        return surveyFeed;
-    }
-
-    public void setSurveyFeed(SurveyFeed surveyFeed) {
-        this.surveyFeed = surveyFeed;
-    }
-
-    @OneToMany(mappedBy="survey", targetEntity = Question.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setSurveys(List<Survey> surveys) {
+        this.surveys = surveys;
     }
 
     @Override
@@ -80,10 +60,10 @@ public class Survey extends BaseObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Survey survey = (Survey) o;
+        SurveyFeed that = (SurveyFeed) o;
 
-        if (name != null ? !name.equals(survey.name) : survey.name != null) return false;
-        if (tattoo != null ? !tattoo.equals(survey.tattoo) : survey.tattoo != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (tattoo != null ? !tattoo.equals(that.tattoo) : that.tattoo != null) return false;
 
         return true;
     }
@@ -97,10 +77,11 @@ public class Survey extends BaseObject {
 
     @Override
     public String toString() {
-        return "Survey{" +
+        return "SurveyFeed{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tattoo=" + tattoo +
+                ", surveys=" + surveys +
                 '}';
     }
 }

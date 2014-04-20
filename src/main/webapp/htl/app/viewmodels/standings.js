@@ -1,4 +1,6 @@
 ﻿define(function() {
+    var router = require('plugins/router');
+
     var ctor = function () {
         this.displayName = 'We\'re winning, bitches!';
         this.description = 'Playing HTL makes you smarter, richer, and more attractive.';
@@ -8,6 +10,12 @@
                 return b.score - a.score;
             });
         }
+
+        function activate(league){
+            this.league = router.activeInstruction().config.settings.league;
+        }
+
+        this.activate = activate;
 
         var league1standings = [
             { name: "Andy", score: "6" },

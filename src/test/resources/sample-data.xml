@@ -129,4 +129,16 @@
             <value>Raible</value>
         </row>
     </table>
+    <table name="league">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">League 1</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">League 2</value>
+        </row>
+    </table>
 </dataset>

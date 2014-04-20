@@ -1,5 +1,6 @@
-package com.fromthebasement.dao;
+package com.fromthebasement.dao.jpa;
 
+import com.fromthebasement.dao.SurveyDao;
 import com.fromthebasement.dao.jpa.GenericDaoJpa;
 import com.fromthebasement.model.Person;
 import com.fromthebasement.model.Survey;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Repository;
  * Created by jeffginn on 4/13/14.
  */
 @Repository("surveyDao")
-public class SurveyDaoImpl extends GenericDaoJpa<Survey, Long> implements SurveyDao {
-    public SurveyDaoImpl() {
+public class SurveyDaoJpa extends GenericDaoJpa<Survey, Long> implements SurveyDao {
+    public SurveyDaoJpa() {
         super(Survey.class);
     }
 }
