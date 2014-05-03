@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Player extends BaseObject {
     private Long    id;
     private String  name;
-    private int     score;
+    private Integer score;
     private Tattoo  tattoo;
 
     @Id
@@ -35,11 +35,11 @@ public class Player extends BaseObject {
         this.name = name;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
@@ -58,8 +58,8 @@ public class Player extends BaseObject {
 
         Player player = (Player) o;
 
-        if (score != player.score) return false;
         if (name != null ? !name.equals(player.name) : player.name != null) return false;
+        if (score != null ? !score.equals(player.score) : player.score != null) return false;
         if (tattoo != null ? !tattoo.equals(player.tattoo) : player.tattoo != null) return false;
 
         return true;
@@ -68,7 +68,7 @@ public class Player extends BaseObject {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + score;
+        result = 31 * result + (score != null ? score.hashCode() : 0);
         result = 31 * result + (tattoo != null ? tattoo.hashCode() : 0);
         return result;
     }

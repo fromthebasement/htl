@@ -9,15 +9,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Created by jeffginn on 4/19/14.
  */
 @XmlRootElement
 @Entity
 public class League extends BaseObject {
-    private Long        id;
-    private String      name;
-    private Tattoo      tattoo;
+    private Long         id;
+    private String       name;
+    private Tattoo       tattoo;
     private Set<Player> players = new HashSet<Player>();
 
     @Id
@@ -52,7 +53,7 @@ public class League extends BaseObject {
     @JoinTable(
             name = "player_league",
             joinColumns = { @JoinColumn(name = "league_id") },
-            inverseJoinColumns = @JoinColumn(name = "player_league_id")
+            inverseJoinColumns = @JoinColumn(name = "player_id")
     )
     public Set<Player> getPlayers() {
         return players;

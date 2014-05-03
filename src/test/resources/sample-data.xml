@@ -141,4 +141,74 @@
             <value description="name">League 2</value>
         </row>
     </table>
+    <table name="player">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Andy</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">Becky</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="name">Dan</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="name">Grant</value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="name">Ryan</value>
+        </row>
+        <row>
+            <value description="id">6</value>
+            <value description="name">Matt</value>
+        </row>
+        <row>
+            <value description="id">7</value>
+            <value description="name">Jeff</value>
+        </row>
+        <row>
+            <value description="id">8</value>
+            <value description="name">Isabel</value>
+        </row>
+    </table>
+    <table name="player_league">
+        <row>
+            <value description="league_id">1</value>
+            <value description="player_id">1</value>
+        </row>
+        <row>
+            <value description="league_id">1</value>
+            <value description="player_id">2</value>
+        </row>
+        <row>
+            <value description="league_id">1</value>
+            <value description="player_id">3</value>
+        </row>
+        <row>
+            <value description="league_id">1</value>
+            <value description="player_id">4</value>
+        </row>
+        <row>
+            <value description="league_id">2</value>
+            <value description="player_id">5</value>
+        </row>
+        <row>
+            <value description="league_id">2</value>
+            <value description="player_id">6</value>
+        </row>
+        <row>
+            <value description="league_id">2</value>
+            <value description="player_id">7</value>
+        </row>
+        <row>
+            <value description="league_id">2</value>
+            <value description="player_id">8</value>
+        </row>
+    </table>
 </dataset>
