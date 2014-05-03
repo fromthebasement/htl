@@ -11,7 +11,9 @@
         'knockout-mapping': '../lib/knockout-mapping/knockout.mapping-2.4.1',
         'knockout-bootstrap': 'bootstraps/knockout-bootstrap',
         'rest': 'services/rest',
-        'appViewModel': 'viewmodels/appViewModel'
+        'appViewModel': 'viewmodels/appViewModel',
+        'handsontable': '../lib/jquery.handsontable/jquery.handsontable.full',
+        'knockout-handsontable': '../lib/jquery.handsontable/knockout-handsontable'
     },
     shim: {
         'bootstrap': {
@@ -39,7 +41,12 @@ define(function(require, exports, module) {
     app.configurePlugins({
         router:true,
         dialog: true,
-        widget: true
+        widget: {
+            kinds: [
+                'expander',
+                'standings'
+            ]
+        }
     });
 
     app.start().then(function() {

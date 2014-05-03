@@ -25,13 +25,23 @@ define(function(require, exports, module) {
 
     var league = {
         _urls: {
-            'getAll' : '/services/api/leagues'
+            'getAll' : '/services/api/leagues',
+            'players' : '/services/api/leagues/{0}/players'
         },
 
         'getAll' : function(settings){
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'GET',
                 'url': league._urls.getAll
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'getPlayers' : function(settings){
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': league._urls.players.format(settings.league.id)
             });
 
             return $.ajax(ajaxConfig);
