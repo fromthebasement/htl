@@ -13,8 +13,8 @@
 
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
         <intercept-url pattern="/services/api/login**" access="permitAll"/>
-        <intercept-url pattern="/services/api/leagues**" access="permitAll"/>
-        <intercept-url pattern="/services/api/leagues/**" access="permitAll"/>
+        <intercept-url pattern="/services/api/leagues**" method ="GET" access="permitAll"/>
+        <intercept-url pattern="/services/api/leagues/**" method="GET" access="permitAll"/>
 
         <intercept-url pattern="/services/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 

@@ -36,6 +36,11 @@ public class LeagueManagerImpl extends GenericManagerImpl<League, Long> implemen
     }
 
     @Override
+    public League createLeague( League league ) {
+        return leagueDao.save( league );
+    }
+
+    @Override
     public Set<Player> getPlayers(Long id) {
         League league = leagueDao.get(id);
 

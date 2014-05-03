@@ -13,8 +13,7 @@
                 { route: '', title:'Questions', moduleId: 'viewmodels/survey', nav: true, adminOnly: false },
                 { route: 'standings', title:'Standings', moduleId: 'viewmodels/standings', nav: false, adminOnly: false },
                 { route: 'login(:/redirect)', title:'Login', moduleId: 'viewmodels/login', nav: false, adminOnly: false },
-                { route: 'logout', title:'Logout', moduleId: 'viewmodels/logout', nav: false, adminOnly: false },
-                { route: 'surveyManager', title:'Surveys', moduleId: 'viewmodels/surveyManager', nav: true, adminOnly: true }
+                { route: 'logout', title:'Logout', moduleId: 'viewmodels/logout', nav: false, adminOnly: false }
             ];
 
             getLeagues().done(function(data){

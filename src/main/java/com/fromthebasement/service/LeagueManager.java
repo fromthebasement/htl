@@ -21,6 +21,9 @@ public interface LeagueManager extends GenericManager<League, Long> {
     @Path("{id}/players")
     Set<Player> getPlayers(@PathParam("id") Long id);
 
+    @POST
+    League createLeague( League league );
+
     @PUT
     @Path("{id}/players")
     Set<Player> updatePlayers(@PathParam("id") Long id, @RequestBody Player[] players );
