@@ -1,8 +1,10 @@
 package com.fromthebasement.service.impl;
 
 import com.fromthebasement.dao.LeagueDao;
+import com.fromthebasement.dao.LeaguePlayerDao;
 import com.fromthebasement.dao.PlayerDao;
 import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
 import com.fromthebasement.model.Player;
 import com.fromthebasement.service.LeagueManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,54 +25,44 @@ public class LeagueManagerImpl extends GenericManagerImpl<League, Long> implemen
 
     PlayerDao playerDao;
 
+    LeaguePlayerDao leaguePlayerDao;
+
     @Autowired
     public LeagueManagerImpl(LeagueDao leagueDao, PlayerDao playerDao) {
         super(leagueDao);
         this.leagueDao = leagueDao;
-        this.playerDao = playerDao;
     }
 
     @Override
-    public List<League> getLeagues() {
-        return leagueDao.getAll();
+    public List<League> getAll() {
+        return super.getAll();
     }
 
     @Override
-    public League createLeague( League league ) {
+    public League create( League league ) {
         return leagueDao.save( league );
     }
 
     @Override
-    public Set<Player> getPlayers(Long id) {
+    public Set<LeaguePlayer> getLeaguePlayers(Long id) {
         League league = leagueDao.get(id);
 
-        return league.getPlayers();
+        return league.getLeaguePlayers();
     }
 
-    @Override
-    public Set<Player> updatePlayers(Long id, @RequestBody Player[] players) {
+    public LeaguePlayer addPlayer(Long id, Player player) {
         League league = leagueDao.get(id);
+        player = playerDao.save(player);
 
-        Set<Player> currentPlayers = new HashSet<Player>();
+        LeaguePlayer leaguePlayer = leaguePlayerDao.get(league,player);
 
-        for( Player player : players ) {
-            currentPlayers.add(playerDao.save(player));
-        }
+        if( leaguePlayer != null )
+            return leaguePlayer;
 
-        league.setPlayers( currentPlayers );
+        leaguePlayer = new LeaguePlayer(league,player);
 
-        return league.getPlayers();
-    }
+        leaguePlayer = leaguePlayerDao.save(leaguePlayer);
 
-    @Override
-    public Player addPlayer(Long id, Player player) {
-        League league = leagueDao.get(id);
-
-        if( player.getId() == null )
-            player = playerDao.save( player );
-
-        league.addPlayer(player);
-
-        return player;
+        return leaguePlayer;
     }
 }

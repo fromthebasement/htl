@@ -16,10 +16,10 @@ import java.util.Set;
 @XmlRootElement
 @Entity
 public class League extends BaseObject {
-    private Long         id;
-    private String       name;
-    private Tattoo       tattoo;
-    private Set<Player> players = new HashSet<Player>();
+    private Long                id;
+    private String              name;
+    private Tattoo              tattoo;
+    private Set<LeaguePlayer>   leaguePlayers = new HashSet<LeaguePlayer>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,28 +48,22 @@ public class League extends BaseObject {
     }
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SELECT)
-    @JoinTable(
-            name = "player_league",
-            joinColumns = { @JoinColumn(name = "league_id") },
-            inverseJoinColumns = @JoinColumn(name = "player_id")
-    )
-    public Set<Player> getPlayers() {
-        return players;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "league", cascade=CascadeType.ALL)
+    public Set<LeaguePlayer> getLeaguePlayers() {
+        return leaguePlayers;
     }
 
     /**
-     * Adds a player to the league
+     * Adds a league player to the league
      *
-     * @param player the fully instantiated player
+     * @param leaguePlayer the fully instantiated league player
      */
-    public void addPlayer(Player player) {
-        getPlayers().add( player );
+    public void addLeaguePlayer(LeaguePlayer leaguePlayer) {
+        getLeaguePlayers().add( leaguePlayer );
     }
 
-    public void setPlayers(Set<Player> players) {
-        this.players = players;
+    public void setLeaguePlayers(Set<LeaguePlayer> leaguePlayers) {
+        this.leaguePlayers = leaguePlayers;
     }
 
     @Override

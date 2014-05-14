@@ -1,9 +1,6 @@
 package com.fromthebasement.dao;
 
-import com.fromthebasement.model.League;
-import com.fromthebasement.model.Player;
-import com.fromthebasement.model.Survey;
-import com.fromthebasement.model.Tattoo;
+import com.fromthebasement.model.*;
 import org.joda.time.DateTime;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,7 +22,7 @@ public class LeagueDaoTest extends BaseDaoTestCase {
     private LeagueDao leagueDao;
 
     @Autowired
-    private PlayerDao playerDao;
+    private LeaguePlayerDao leaguePlayerDao;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -41,26 +38,25 @@ public class LeagueDaoTest extends BaseDaoTestCase {
 
         league.setTattoo( tattoo );
 
-        league = leagueDao.save(league);
-
-        league = leagueDao.get(league.getId());
-
         Player player1 = new Player();
         player1.setName( "Player 1" );
-        player1 = playerDao.save( player1 );
+
+        LeaguePlayer leaguePlayer1 = new LeaguePlayer();
+        leaguePlayer1.setPlayer( player1 );
+        leaguePlayer1.setLeague( league );
+
+        leaguePlayer1 = leaguePlayerDao.save( leaguePlayer1 );
 
         Player player2 = new Player();
         player2.setName( "Player 2" );
-        player2 = playerDao.save(player2);
 
-        league.addPlayer( player1 );
-        league.addPlayer( player2 );
+        LeaguePlayer leaguePlayer2 = new LeaguePlayer();
+        leaguePlayer2.setPlayer( player2 );
+        leaguePlayer2.setLeague( league );
+
+        leaguePlayer2 = leaguePlayerDao.save( leaguePlayer2 );
 
         assertNotNull( league.getId() );
-
-        Set<Player> players = league.getPlayers();
-
-        assertEquals(2, players.size() );
     }
 
     @Test

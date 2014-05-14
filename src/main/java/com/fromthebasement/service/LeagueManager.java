@@ -1,6 +1,7 @@
 package com.fromthebasement.service;
 
 import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
 import com.fromthebasement.model.Person;
 import com.fromthebasement.model.Player;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,20 +16,12 @@ import java.util.Set;
 @Path("/leagues")
 public interface LeagueManager extends GenericManager<League, Long> {
     @GET
-    List<League> getLeagues();
+    List<League> getAll();
 
     @GET
     @Path("{id}/players")
-    Set<Player> getPlayers(@PathParam("id") Long id);
+    Set<LeaguePlayer> getLeaguePlayers(@PathParam("id") Long id);
 
     @POST
-    League createLeague( League league );
-
-    @PUT
-    @Path("{id}/players")
-    Set<Player> updatePlayers(@PathParam("id") Long id, @RequestBody Player[] players );
-
-    @POST
-    @Path("{id}/players")
-    Player addPlayer(@PathParam("id") Long id, @RequestBody Player player);
+    League create( League league );
 }

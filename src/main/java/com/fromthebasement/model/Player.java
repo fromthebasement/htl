@@ -1,9 +1,6 @@
 package com.fromthebasement.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,6 +13,7 @@ public class Player extends BaseObject {
     private String  name;
     private Integer score;
     private Tattoo  tattoo;
+    private User    user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,6 +47,17 @@ public class Player extends BaseObject {
 
     public void setTattoo(Tattoo tattoo) {
         this.tattoo = tattoo;
+    }
+
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
