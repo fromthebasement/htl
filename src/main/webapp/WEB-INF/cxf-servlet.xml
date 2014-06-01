@@ -27,6 +27,7 @@
             <ref bean="loginService"/>
             <ref bean="logoutService"/>
             <ref bean="leagueManager"/>
+            <ref bean="surveyFeedManager"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider"/>

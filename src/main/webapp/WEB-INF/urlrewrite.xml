@@ -59,6 +59,14 @@
         <to>/htl/$1</to>
     </rule>
     <rule>
+        <from>/js/**</from>
+        <to>/js/$1</to>
+    </rule>
+    <rule>
+        <from>/css/**</from>
+        <to>/css/$1</to>
+    </rule>
+    <rule>
         <from>/webjars/**</from>
         <to>/webjars/$1</to>
     </rule>

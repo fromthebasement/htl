@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.skyscreamer.yoga.annotations.Core;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Survey extends BaseObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Core
     public Long getId() {
         return id;
     }
@@ -30,6 +32,7 @@ public class Survey extends BaseObject {
     }
 
     @Column(length=50)
+    @Core
     public String getName() {
         return name;
     }

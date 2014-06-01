@@ -140,4 +140,48 @@
             <value description="role_id">-1</value>
         </row>
     </table>
+    <table name="survey_feed">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Golf League</value>
+        </row>
+    </table>
+    <table name="user_survey_feed">
+        <column>survey_feed_id</column>
+        <column>user_id</column>
+        <row>
+            <value description="survey_feed_id">1</value>
+            <value description="user_id">-2</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">1</value>
+            <value description="user_id">-3</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">1</value>
+            <value description="user_id">-4</value>
+        </row>
+    </table>
+    <table name="survey">
+        <column>id</column>
+        <column>name</column>
+        <column>survey_feed_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Week 1</value>
+            <value description="survey_feed_id">1</value>
+        </row>
+    </table>
+    <table name="question">
+        <column>id</column>
+        <column>name</column>
+        <column>survey_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">What is your favorite color</value>
+            <value description="survey_id">1</value>
+        </row>
+    </table>
 </dataset>

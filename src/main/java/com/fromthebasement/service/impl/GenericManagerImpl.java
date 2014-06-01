@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.fromthebasement.dao.GenericDao;
 import com.fromthebasement.service.GenericManager;
+import org.skyscreamer.yoga.configuration.YogaEntityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -45,7 +46,7 @@ import java.util.List;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  *  Updated by jgarcia: added full text search + reindexing
  */
-public class GenericManagerImpl<T, PK extends Serializable> implements GenericManager<T, PK> {
+public class GenericManagerImpl<T, PK extends Serializable>  extends YogaEntityConfiguration<T> implements GenericManager<T, PK> {
     /**
      * Log variable for all child classes. Uses LogFactory.getLog(getClass()) from Commons Logging
      */

@@ -1,7 +1,12 @@
 package com.fromthebasement.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.skyscreamer.yoga.annotations.Core;
+import org.skyscreamer.yoga.annotations.URITemplate;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,14 +17,17 @@ import java.util.Set;
  * Created by jeffginn on 4/15/14.
  */
 @Entity
+@URITemplate("/surveyFeeds/{id}")
 public class SurveyFeed extends BaseObject {
     private Long            id;
     private String          name;
     private Tattoo          tattoo;
     private List<Survey>    surveys;
+    private Set<User>       users = new HashSet<User>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Core
     public Long getId() {
         return id;
     }
@@ -29,6 +37,7 @@ public class SurveyFeed extends BaseObject {
     }
 
     @Column(length=50)
+    @Core
     public String getName() {
         return name;
     }
@@ -53,6 +62,30 @@ public class SurveyFeed extends BaseObject {
 
     public void setSurveys(List<Survey> surveys) {
         this.surveys = surveys;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SELECT)
+    @JoinTable(
+            name = "user_survey_feed",
+            joinColumns = { @JoinColumn(name = "survey_feed_id") },
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    /**
+     * Adds a user to the survey feed
+     *
+     * @param user the fully instantiated user
+     */
+    public void addUser(User user) {
+        getUsers().add(user);
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     @Override

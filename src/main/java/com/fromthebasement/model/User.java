@@ -22,6 +22,7 @@ import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
+import org.skyscreamer.yoga.annotations.Core;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -78,12 +79,14 @@ public class User extends BaseObject implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @DocumentId
+    @Core
     public Long getId() {
         return id;
     }
 
     @Column(nullable = false, length = 50, unique = true)
     @Field
+    @Core
     public String getUsername() {
         return username;
     }
@@ -325,13 +328,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.credentialsExpired = credentialsExpired;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SELECT)
-    @JoinTable(
-            name = "user_survey_feed",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = @JoinColumn(name = "survey_feed_id")
-    )
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
     public Set<SurveyFeed> getSurveyFeeds() {
         return surveyFeeds;
     }
@@ -349,7 +347,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.surveyFeeds = surveyFeeds;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      */
     public boolean equals(Object o) {

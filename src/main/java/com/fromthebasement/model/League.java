@@ -20,6 +20,7 @@ public class League extends BaseObject {
     private String              name;
     private Tattoo              tattoo;
     private Set<LeaguePlayer>   leaguePlayers = new HashSet<LeaguePlayer>();
+    private SurveyFeed          surveyFeed;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,6 +52,16 @@ public class League extends BaseObject {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "league", cascade=CascadeType.ALL)
     public Set<LeaguePlayer> getLeaguePlayers() {
         return leaguePlayers;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="surveyFeed_id")
+    public SurveyFeed getSurveyFeed() {
+        return surveyFeed;
+    }
+
+    public void setSurveyFeed(SurveyFeed surveyFeed) {
+        this.surveyFeed = surveyFeed;
     }
 
     /**

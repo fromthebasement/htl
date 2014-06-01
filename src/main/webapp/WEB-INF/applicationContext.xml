@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-lazy-init="true">
@@ -10,6 +11,8 @@
 
     <!-- Activates scanning of @Repository and @Service -->
     <context:component-scan base-package="com.fromthebasement"/>
+    <context:component-scan base-package="org.skyscreamer.yoga.springmvc.controller"/>
+
 
     <!-- Add new DAOs here -->
 
@@ -17,4 +20,39 @@
 
     <!-- Configure and Alternative PasswordTokenManager -->
 	<!-- <bean id="passwordTokenManager" class="com.fromthebasement.service.impl.PersistentPasswordTokenManagerImpl" autowire="default" /> -->
+
+    <!-- YOGA CONFIG BEGIN -->
+    <bean id="yogaBuilder" class="org.skyscreamer.yoga.builder.YogaBuilder"
+          p:classFinderStrategy="#{new org.skyscreamer.yoga.classfinder.HibernateClassFinderStrategy()}"
+          p:outputCountLimit="2000"
+          p:createYogaLinks="true"
+          p:enableStarAsAllFields="true"
+            >
+        <property name="entityConfigurations">
+            <list>
+                <!--<bean class="com.fromthebasement.service.impl.SurveyFeedManagerImpl"/>-->
+            </list>
+        </property>
+        <property name="yogaMetaDataRegisteredClasses">
+            <list>
+                <value>com.fromthebasement.model.SurveyFeed</value>
+                <!--<value>org.skyscreamer.yoga.demo.model.Artist</value>-->
+                <!--<value>org.skyscreamer.yoga.demo.model.Song</value>-->
+                <!--<value>org.skyscreamer.yoga.demo.model.User</value>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- this is needed for the meta controller.  This will ensure backwards compatibility -->
+    <bean name="metaDataRegistry" factory-bean="yogaBuilder" factory-method="getMetaDataRegistry" />
+
+    <bean name="yogaViewFactory" class="org.skyscreamer.yoga.builder.YogaBuilderViewFactory"
+          p:builder-ref="yogaBuilder" />
+
+    <bean name="xml.view" factory-bean="yogaViewFactory" factory-method="createXmlSelectorView" />
+    <bean name="xhtml.view" factory-bean="yogaViewFactory" factory-method="createXhtmlSelectorView" />
+    <bean name="json.view" factory-bean="yogaViewFactory" factory-method="createStreamingJsonSelectorView" />
+    <bean name="builder.view" factory-bean="yogaViewFactory" factory-method="createSelectorBuilderView" />
+
+    <!-- YOGA CONFIG END -->
 </beans>
