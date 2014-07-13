@@ -1,5 +1,8 @@
 package com.fromthebasement.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.skyscreamer.yoga.annotations.Core;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +16,7 @@ public class Answer extends BaseObject {
     private Question    question;
 
     @Id
+    @Core
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
@@ -23,6 +27,7 @@ public class Answer extends BaseObject {
     }
 
     @Column(length=50)
+    @Core
     public String getName() {
         return name;
     }
@@ -40,7 +45,7 @@ public class Answer extends BaseObject {
     }
 
     @ManyToOne
-    @JoinColumn(name="survey_id")
+    @JoinColumn(name="question_id")
     public Question getQuestion() {
         return question;
     }

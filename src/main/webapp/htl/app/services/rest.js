@@ -1,6 +1,8 @@
 define(function(require, exports, module) {
     require('jquery');
 
+    var urlBuilder = require('services/urlBuilder');
+
     var defaultAjaxConfig = {
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -9,7 +11,7 @@ define(function(require, exports, module) {
 
     var user = {
         _urls: {
-            'login' : '/services/api/login'
+            'login' : '/api/v1/login'
         },
 
         'login': function(settings){
@@ -47,8 +49,131 @@ define(function(require, exports, module) {
             return $.ajax(ajaxConfig);
         }
     }
+
+    var surveyFeeds = {
+        _urls: {
+            'get'       : '/api/v1/surveyFeeds/{0}',
+            'getAll'    : '/api/v1/surveyFeeds'
+        },
+
+        'getAll' : function(settings){
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': surveyFeeds._urls.getAll
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'get' : function(settings){
+            var url = urlBuilder.appendSelector( surveyFeeds._urls.get.format(settings.id), settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': url
+            });
+
+            return $.ajax(ajaxConfig);
+        }
+    }
+
+    var surveys = {
+        _urls: {
+            'get'           : '/api/v1/surveys/{0}',
+            'addQuestion'   : '/api/v1/surveys/{0}/questions'
+        },
+
+        'get' : function(settings){
+            var url = urlBuilder.appendSelector( surveys._urls.get.format(settings.id), settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': url
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'addQuestion' : function(settings) {
+            var url = urlBuilder.appendSelector( surveys._urls.addQuestion.format(settings.id), settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'POST',
+                'url': url
+            });
+
+            return $.ajax(ajaxConfig);
+        }
+    }
+
+    var questions = {
+        _urls: {
+            'create' : '/api/v1/questions',
+            'delete' : '/api/v1/questions'
+        },
+
+        'create' : function(settings) {
+            var url = urlBuilder.appendSelector( questions._urls.create, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'POST',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'delete' : function(settings) {
+            var url = questions._urls.delete;
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'DELETE',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        }
+    }
+
+    var answers = {
+        _urls: {
+            'create' : '/api/v1/answers',
+            'delete' : '/api/v1/answers'
+        },
+
+        'create' : function(settings) {
+            var url = urlBuilder.appendSelector( answers._urls.create, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'POST',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'delete' : function(settings) {
+            var url = answers._urls.delete;
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'DELETE',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        }
+    }
+
     return {
         user: user,
-        league: league
+        league: league,
+        surveyFeeds: surveyFeeds,
+        surveys: surveys,
+        questions: questions,
+        answers: answers
     };
 });

@@ -23,14 +23,10 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     UserManager userManager;
 
-    @Context
-    private MessageContext context;
-
     @Override
-    public User login(LoginOptions loginOptions) {
-        HttpServletRequest request = context.getHttpServletRequest();
+    public User login(LoginOptions loginOptions, HttpServletRequest request) {
         htlApp.login( loginOptions, request );
-        User user = userManager.getUserByUsername(request.getRemoteUser());
-        return user;
+        User user = UserManagerImpl.getCurrentUser();
+        return userManager.get( user.getId() );
     }
 }

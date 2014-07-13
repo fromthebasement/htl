@@ -26,33 +26,18 @@ import java.util.Set;
 @Service("surveyFeedManager")
 public class SurveyFeedManagerImpl extends GenericManagerImpl<SurveyFeed,Long> implements SurveyFeedManager {
     SurveyFeedDao   surveyFeedDao;
-
-    private User getCurrentUser() {
-        User currentUser = null;
-        SecurityContext ctx = SecurityContextHolder.getContext();
-        if (ctx.getAuthentication() != null) {
-            Authentication auth = ctx.getAuthentication();
-            if (auth.getPrincipal() instanceof UserDetails) {
-                currentUser = (User) auth.getPrincipal();
-            } else if (auth.getDetails() instanceof UserDetails) {
-                currentUser = (User) auth.getDetails();
-            } else {
-                throw new AccessDeniedException("User not properly authenticated.");
-            }
-        }
-
-        return currentUser;
-    }
+    UserManager     userManager;
 
     @Autowired
-    public SurveyFeedManagerImpl(SurveyFeedDao surveyFeedDao) {
+    public SurveyFeedManagerImpl(SurveyFeedDao surveyFeedDao, UserManager userManager) {
         super(surveyFeedDao);
         this.surveyFeedDao = surveyFeedDao;
+        this.userManager = userManager;
     }
 
     @Override
     public List<SurveyFeed> getAll() {
-        return getAll(getCurrentUser());
+        return getAll(userManager.get(UserManagerImpl.getCurrentUser().getId()));
     }
 
     @Override

@@ -1,5 +1,19 @@
-﻿<section>
-    <div style="height: 100%">
-        <iframe data-bind="attr: { src: link}" style="height: 100%; width: 100%"></iframe>
+<section class="survey" style="padding-right: 15px; padding-left: 15px;" data-bind="with: survey">
+    <h2 data-bind="text: name"></h2>
+    <div class="questions" data-bind="foreach: questions">
+        <div class="question">
+            <span data-bind="text: $index() + 1 + '.'"></span>
+            <span data-bind="text: name"></span>
+            <div class="answers" data-bind="foreach: answers">
+                <div class="answer">
+                    <input type="radio">
+                    <span data-bind="text: name"></span>
+                    <button data-bind="click: $root.removeAnswer">Remove Answer</button>
+                </div>
+            </div>
+            <button data-bind="click: $root.addAnswer">Add Answer</button>
+            <button data-bind="click: $root.removeQuestion">Remove Question</button>
+        </div>
     </div>
+    <button data-bind="click: $root.addQuestion">Add Question</button>
 </section>

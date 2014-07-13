@@ -1,18 +1,24 @@
 package com.fromthebasement.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.skyscreamer.yoga.annotations.Core;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by jeffginn on 4/14/14.
  */
 @Entity
 public class Question extends BaseObject {
-    private Long    id;
-    private String  name;
-    private Tattoo  tattoo;
-    private Survey  survey;
+    private Long            id;
+    private String          name;
+    private Tattoo          tattoo;
+    private Survey          survey;
+    private List<Answer>    answers;
 
     @Id
+    @Core
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
@@ -23,6 +29,7 @@ public class Question extends BaseObject {
     }
 
     @Column(length=50)
+    @Core
     public String getName() {
         return name;
     }
@@ -47,6 +54,15 @@ public class Question extends BaseObject {
 
     public void setSurvey(Survey survey) {
         this.survey = survey;
+    }
+
+    @OneToMany(mappedBy="question", targetEntity = Answer.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     @Override

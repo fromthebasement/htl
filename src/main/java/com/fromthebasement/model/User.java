@@ -329,7 +329,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     }
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     public Set<SurveyFeed> getSurveyFeeds() {
         return surveyFeeds;
     }

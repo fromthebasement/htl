@@ -180,8 +180,33 @@
         <column>survey_id</column>
         <row>
             <value description="id">1</value>
-            <value description="name">What is your favorite color</value>
+            <value description="name">What is your favorite color?</value>
             <value description="survey_id">1</value>
+        </row>
+    </table>
+    <table name="answer">
+        <column>id</column>
+        <column>name</column>
+        <column>question_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Red</value>
+            <value description="question_id">1</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">Yellow</value>
+            <value description="question_id">1</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="name">Blue</value>
+            <value description="question_id">1</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="name">Green</value>
+            <value description="question_id">1</value>
         </row>
     </table>
 </dataset>

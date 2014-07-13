@@ -2,6 +2,7 @@ package com.fromthebasement.model;
 
 import javax.persistence.*;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.skyscreamer.yoga.annotations.Core;
@@ -59,7 +60,7 @@ public class Survey extends BaseObject {
         this.endTime = endTime;
     }
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn(name="surveyFeed_id")
     public SurveyFeed getSurveyFeed() {
         return surveyFeed;

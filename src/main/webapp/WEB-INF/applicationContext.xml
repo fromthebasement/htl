@@ -11,8 +11,6 @@
 
     <!-- Activates scanning of @Repository and @Service -->
     <context:component-scan base-package="com.fromthebasement"/>
-    <context:component-scan base-package="org.skyscreamer.yoga.springmvc.controller"/>
-
 
     <!-- Add new DAOs here -->
 
@@ -36,6 +34,8 @@
         <property name="yogaMetaDataRegisteredClasses">
             <list>
                 <value>com.fromthebasement.model.SurveyFeed</value>
+                <value>com.fromthebasement.model.User</value>
+                <value>com.fromthebasement.model.Survey</value>
                 <!--<value>org.skyscreamer.yoga.demo.model.Artist</value>-->
                 <!--<value>org.skyscreamer.yoga.demo.model.Song</value>-->
                 <!--<value>org.skyscreamer.yoga.demo.model.User</value>-->

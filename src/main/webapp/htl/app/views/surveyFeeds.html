@@ -1,0 +1,11 @@
+<section style="padding-right: 15px; padding-left: 15px;">
+    <!-- ko if: surveyFeeds().length === 0 -->
+        No survey feeds
+    <!-- /ko -->
+
+    <!-- ko foreach: surveyFeeds -->
+        <a data-bind="attr: { href : '#surveyFeeds/' + id},
+                      text: name">
+        </a>
+    <!-- /ko -->
+</section>

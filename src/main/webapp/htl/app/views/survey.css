@@ -1,0 +1,13 @@
+.survey .questions {
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.survey .question {
+    padding: 10px;
+    border-bottom: 1px solid;
+}
+
+.survey .answer {
+    padding: 5px;
+}

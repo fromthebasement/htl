@@ -1,0 +1,19 @@
+<section style="padding-right: 15px; padding-left: 15px;" data-bind="with: surveyFeed">
+    <h2 data-bind="text: name"></h2>
+    <div>
+        <h3>Authors</h3>
+        <!-- ko foreach: users -->
+            <div data-bind="text: fullName"></div>
+        <!-- /ko -->
+    </div>
+    <div>
+        <h3>Surveys</h3>
+        <!-- ko foreach: surveys -->
+        <div>
+            <a data-bind="attr: { href : '#surveys/' + id},
+                          text: name">
+            </a>
+        </div>
+        <!-- /ko -->
+    </div>
+</section>

@@ -1,5 +1,6 @@
 package com.fromthebasement.service;
 
+import com.fromthebasement.model.Question;
 import com.fromthebasement.model.Survey;
 
 import javax.ws.rs.Path;

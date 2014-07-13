@@ -14,11 +14,14 @@
     <http pattern="/htl/**" security="none"/>
 
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
-        <intercept-url pattern="/services/api/login**" access="permitAll"/>
+        <intercept-url pattern="/app/api/v1/login**" access="permitAll"/>
         <intercept-url pattern="/services/api/leagues**" method ="GET" access="permitAll"/>
         <intercept-url pattern="/services/api/leagues/**" method="GET" access="permitAll"/>
 
         <intercept-url pattern="/services/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/api/v1/surveyFeeds/1" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+
+        <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 
         <form-login
                 authentication-success-handler-ref="mySuccessHandler"
