@@ -92,24 +92,15 @@ define(function(require, exports, module) {
             });
 
             return $.ajax(ajaxConfig);
-        },
-
-        'addQuestion' : function(settings) {
-            var url = urlBuilder.appendSelector( surveys._urls.addQuestion.format(settings.id), settings.selector );
-
-            var ajaxConfig = $.extend( defaultAjaxConfig, {
-                'type': 'POST',
-                'url': url
-            });
-
-            return $.ajax(ajaxConfig);
         }
     }
 
     var questions = {
         _urls: {
             'create' : '/api/v1/questions',
+            'update' : '/api/v1/questions',
             'delete' : '/api/v1/questions'
+
         },
 
         'create' : function(settings) {
@@ -117,6 +108,18 @@ define(function(require, exports, module) {
 
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'POST',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'update' : function(settings) {
+            var url = urlBuilder.appendSelector( questions._urls.update, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'PUT',
                 'url': url,
                 'data': JSON.stringify(settings.data || "")
             });
@@ -140,7 +143,8 @@ define(function(require, exports, module) {
     var answers = {
         _urls: {
             'create' : '/api/v1/answers',
-            'delete' : '/api/v1/answers'
+            'delete' : '/api/v1/answers',
+            'update' : '/api/v1/answers'
         },
 
         'create' : function(settings) {
@@ -148,6 +152,18 @@ define(function(require, exports, module) {
 
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'POST',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'update' : function(settings) {
+            var url = urlBuilder.appendSelector( answers._urls.update, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'PUT',
                 'url': url,
                 'data': JSON.stringify(settings.data || "")
             });

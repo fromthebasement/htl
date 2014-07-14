@@ -7,26 +7,34 @@
         'knockout': '../lib/knockout/knockout-3.1.0',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
         'jquery': '../lib/jquery/jquery-2.1.0',
+        'jquery.ui': '../lib/jquery.ui/jquery-ui',
+        'jquery.ui.touch-punch': "../lib/jquery.ui.touch-punch/jquery.ui.touch-punch",
         'string-formatter': '../lib/string-formatter/string',
         'knockout-mapping': '../lib/knockout-mapping/knockout.mapping-2.4.1',
         'knockout-bootstrap': 'bootstraps/knockout-bootstrap',
+        'knockout-bindings': 'bindings/knockout-bindings',
         'rest': 'services/rest',
         'appViewModel': 'viewmodels/appViewModel',
         'handsontable': '../lib/jquery.handsontable/jquery.handsontable.full',
-        'knockout-handsontable': '../lib/jquery.handsontable/knockout-handsontable'
+        'knockout-handsontable': '../lib/jquery.handsontable/knockout-handsontable',
+        'knockout-sortable': '../lib/knockout-sortable/knockout-sortable'
     },
     shim: {
         'bootstrap': {
             deps: ['jquery'],
             exports: 'jQuery'
-       }
+       },
+       'jquery.ui': ['jquery'],
+       'jquery.ui.touch-punch': ["jquery.ui"]
     }
 });
 
 define(function(require, exports, module) {
+    require("jquery.ui.touch-punch");
     require('bootstrap');
     require('string-formatter');
     require('knockout-bootstrap');
+    require('knockout-bindings');
 
     var system = require('durandal/system'),
         app = require('durandal/app'),

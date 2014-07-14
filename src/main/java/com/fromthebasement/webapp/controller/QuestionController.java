@@ -26,6 +26,14 @@ public class QuestionController {
     }
 
     @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.PUT )
+    public Question update(@RequestBody Question question)
+    {
+        question =  questionManager.save(question);
+        return question;
+    }
+
+    @Transactional( readOnly = false )
     @RequestMapping(method = RequestMethod.DELETE )
     @ResponseBody
     public boolean delete(@RequestBody Question question)

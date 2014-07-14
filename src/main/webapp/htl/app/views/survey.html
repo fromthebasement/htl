@@ -1,13 +1,14 @@
 <section class="survey" style="padding-right: 15px; padding-left: 15px;" data-bind="with: survey">
     <h2 data-bind="text: name"></h2>
-    <div class="questions" data-bind="foreach: questions">
+
+    <div class="questions" data-bind="sortable: { data: questions }">
         <div class="question">
             <span data-bind="text: $index() + 1 + '.'"></span>
-            <span data-bind="text: name"></span>
-            <div class="answers" data-bind="foreach: answers">
+            <span data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></span>
+            <div class="answers" data-bind="sortable: { data: answers }">
                 <div class="answer">
                     <input type="radio">
-                    <span data-bind="text: name"></span>
+                    <span data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></span>
                     <button data-bind="click: $root.removeAnswer">Remove Answer</button>
                 </div>
             </div>
