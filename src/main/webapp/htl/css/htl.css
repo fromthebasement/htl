@@ -1,1 +1,9 @@
 @import "../app/views/views.css";
+
+.htl-button {
+    cursor: pointer;
+}
+
+.htl-sort-handle {
+    cursor: ns-resize;
+}

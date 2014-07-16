@@ -3,7 +3,10 @@
  */
 
 define(function(require, exports, module){
+    require('knockout-bootstrap');
     require('knockout-sortable');
+
+    ko.bindingHandlers.sortable.connectClass = null;
 
     ko.bindingHandlers.sortable.options = {
         distance: 3,
@@ -12,7 +15,6 @@ define(function(require, exports, module){
         refreshPositions: true,
         tolerance: "pointer",
         cancel: '[contenteditable=true]',
-        items: '> div',
         start: function(event,ui){
         },
         sort: $.noop,

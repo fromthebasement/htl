@@ -13,9 +13,9 @@ define(function() {
         });
 
         function activate(id){
-            rest.surveys.get({
+            return rest.surveys.get({
                 id: id,
-                selector: 'name,questions(name,answers(name)),endTime'
+                selector: 'name,questions(name,answers(name)),endTime,surveyFeed(name)'
             }).done(function(data){
                 ko.mapping.fromJS(data, {}, _this.survey);
             });
@@ -28,7 +28,9 @@ define(function() {
                 selector: 'name,answers(name)',
                 data: {
                     name: "New Question",
-                    survey: ko.mapping.toJS(survey),
+                    survey: {
+                        id: survey.id()
+                    },
                     answers: []
                 }
             }).done(function(data){

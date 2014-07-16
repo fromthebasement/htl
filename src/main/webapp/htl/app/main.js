@@ -25,7 +25,8 @@
             exports: 'jQuery'
        },
        'jquery.ui': ['jquery'],
-       'jquery.ui.touch-punch': ["jquery.ui"]
+       'jquery.ui.touch-punch': ["jquery.ui"],
+       'knockout': ["jquery"]
     }
 });
 

@@ -6,8 +6,24 @@
 .survey .question {
     padding: 10px;
     border-bottom: 1px solid;
+    font-size: 28px;
+}
+
+.survey .questions > .view-placeholder {
+    height: 100px;
+    padding: 10px;
+    border-bottom: 1px solid;
 }
 
 .survey .answer {
     padding: 5px;
+    font-size: 14px;
+}
+
+.survey .answers > .view-placeholder {
+    height: 35px;
+}
+
+.survey .icon-list > * {
+    padding-right: 10px;
 }

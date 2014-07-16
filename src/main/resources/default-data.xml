@@ -145,7 +145,15 @@
         <column>name</column>
         <row>
             <value description="id">1</value>
-            <value description="name">Golf League</value>
+            <value description="name">Golf Surveys</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">Baseball Surveys</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="name">Jeff's Poker Tournament</value>
         </row>
     </table>
     <table name="user_survey_feed">
@@ -161,6 +169,30 @@
         </row>
         <row>
             <value description="survey_feed_id">1</value>
+            <value description="user_id">-4</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">2</value>
+            <value description="user_id">-2</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">2</value>
+            <value description="user_id">-3</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">2</value>
+            <value description="user_id">-4</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">3</value>
+            <value description="user_id">-2</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">3</value>
+            <value description="user_id">-3</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">3</value>
             <value description="user_id">-4</value>
         </row>
     </table>
