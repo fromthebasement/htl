@@ -1,11 +1,11 @@
 <section class="survey" style="padding: 15px;" data-bind="with: survey">
     <a data-bind="attr: { href:'#surveyFeeds/' + surveyFeed.id()}"><i class="fa fa-arrow-left"></i> <span data-bind="text: surveyFeed.name"></span></a>
-    <h2 data-bind="text: name"></h2>
+    <h2 data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></h2>
 
     <div class="questions" data-bind="sortable: { data: questions, options: { handle: '.htl-sort-handle' } }">
         <div class="question">
+            <span data-bind="text: $index() + 1 + '.'"></span>
             <span class="icon-list">
-                <span data-bind="text: $index() + 1 + '.'"></span>
                 <i class="fa fa-arrows-v htl-sort-handle"></i>
                 <i class="fa fa-trash-o htl-button" data-bind="click: $root.removeQuestion"></i>
             </span>

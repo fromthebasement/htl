@@ -7,3 +7,7 @@
 .htl-sort-handle {
     cursor: ns-resize;
 }
+
+.icon-list > * {
+    padding: 0 5px;
+}

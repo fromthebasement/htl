@@ -11,10 +11,15 @@
         <h3>Surveys</h3>
         <!-- ko foreach: surveys -->
         <div>
-            <a data-bind="attr: { href : '#surveys/' + id},
+            <span class="icon-list">
+                <i class="fa fa-trash-o htl-button" data-bind="click: $root.removeSurvey"></i>
+            </span>
+            <a class="name"
+               data-bind="attr: { href : '#surveys/' + id()},
                           text: name">
             </a>
         </div>
         <!-- /ko -->
+        <button data-bind="click: $root.addSurvey">Add Survey</button>
     </div>
 </section>

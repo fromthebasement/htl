@@ -14,6 +14,7 @@
         'knockout-bootstrap': 'bootstraps/knockout-bootstrap',
         'knockout-bindings': 'bindings/knockout-bindings',
         'rest': 'services/rest',
+        'utils': 'services/utils',
         'appViewModel': 'viewmodels/appViewModel',
         'handsontable': '../lib/jquery.handsontable/jquery.handsontable.full',
         'knockout-handsontable': '../lib/jquery.handsontable/knockout-handsontable',

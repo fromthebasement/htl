@@ -10,9 +10,7 @@ import com.fromthebasement.service.SurveyManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +30,30 @@ public class SurveyController
     public Survey get(@PathVariable("id") long id)
     {
         return surveyManager.get( id );
+    }
+
+    @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.POST )
+    public Survey create(@RequestBody Survey survey)
+    {
+        survey =  surveyManager.save(survey);
+        return survey;
+    }
+
+    @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.PUT )
+    public Survey update(@RequestBody Survey survey)
+    {
+        survey =  surveyManager.save(survey);
+        return survey;
+    }
+
+    @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.DELETE )
+    @ResponseBody
+    public boolean delete(@RequestBody Survey survey)
+    {
+        surveyManager.remove(survey);
+        return true;
     }
 }

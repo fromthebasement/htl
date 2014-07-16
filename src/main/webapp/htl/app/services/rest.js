@@ -79,8 +79,10 @@ define(function(require, exports, module) {
 
     var surveys = {
         _urls: {
-            'get'           : '/api/v1/surveys/{0}',
-            'addQuestion'   : '/api/v1/surveys/{0}/questions'
+            'get'    : '/api/v1/surveys/{0}',
+            'create' : '/api/v1/surveys',
+            'update' : '/api/v1/surveys',
+            'delete' : '/api/v1/surveys'
         },
 
         'get' : function(settings){
@@ -89,6 +91,42 @@ define(function(require, exports, module) {
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'GET',
                 'url': url
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'create' : function(settings) {
+            var url = urlBuilder.appendSelector( surveys._urls.create, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'POST',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'update' : function(settings) {
+            var url = urlBuilder.appendSelector( surveys._urls.update, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'PUT',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'delete' : function(settings) {
+            var url = surveys._urls.delete;
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'DELETE',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
             });
 
             return $.ajax(ajaxConfig);
