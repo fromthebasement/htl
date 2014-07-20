@@ -10,9 +10,9 @@
             var deferred = $.Deferred();
 
             var baseRouterMap = [
-                { route: '', title:'Questions', moduleId: 'viewmodels/questions', nav: true, adminOnly: false },
+                { route: '', title:'Survey Feeds', moduleId: 'viewmodels/surveyFeeds', nav: true, adminOnly: false },
+                { route: 'surveyResponses', title:'Questions', moduleId: 'viewmodels/questions', nav: false, adminOnly: false },
                 { route: 'standings', title:'Standings', moduleId: 'viewmodels/standings', nav: false, adminOnly: false },
-                { route: 'surveyFeeds', title:'Survey Feeds', moduleId: 'viewmodels/surveyFeeds', nav: true, adminOnly: false },
                 { route: 'surveyFeeds/:id', title:'Survey Feed', moduleId: 'viewmodels/surveyFeed', nav: false, adminOnly: false },
                 { route: 'surveys/:id', title:'Survey', moduleId: 'viewmodels/survey', nav: false, adminOnly: false },
                 { route: 'login(:/redirect)', title:'Login', moduleId: 'viewmodels/login', nav: false, adminOnly: false },
