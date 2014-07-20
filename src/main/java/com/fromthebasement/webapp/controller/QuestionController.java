@@ -29,7 +29,11 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.PUT )
     public Question update(@RequestBody Question question)
     {
-        question =  questionManager.save(question);
+        Question _existingQuestion = questionManager.get(question.getId());
+
+        _existingQuestion.setName( question.getName() );
+
+        question =  questionManager.save(_existingQuestion);
         return question;
     }
 

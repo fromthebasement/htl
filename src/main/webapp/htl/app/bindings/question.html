@@ -1,0 +1,11 @@
+<span data-bind="text: $index() + 1 + '.'"></span>
+        <span class="icon-list">
+            <i class="fa fa-arrows-v htl-sort-handle"></i>
+            <i class="fa fa-trash-o htl-button" data-bind="click: $root.removeQuestion"></i>
+        </span>
+<span class="name" data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></span>
+<div class="answers" data-bind="sortable: { data: answers, options: { handle: '.htl-sort-handle' }, afterAdd: $root.selectName }">
+    <div data-bind="answer: $data">
+    </div>
+</div>
+<i class="fa fa-plus htl-button" data-bind="click: $root.addAnswer"></i>

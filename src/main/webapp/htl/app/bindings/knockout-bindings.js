@@ -24,4 +24,7 @@ define(function(require, exports, module){
     }
 
     require('bindings/editableText');
+    require('bindings/surveyRow');
+    require('bindings/question');
+    require('bindings/answer');
 });

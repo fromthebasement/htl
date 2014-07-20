@@ -20,6 +20,7 @@ public class Survey extends BaseObject {
     private DateTime        endTime;
     private SurveyFeed      surveyFeed;
     private List<Question>  questions;
+    private boolean         isActive = false;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -77,6 +78,15 @@ public class Survey extends BaseObject {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    @Column(columnDefinition = "boolean default false")
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     @Override

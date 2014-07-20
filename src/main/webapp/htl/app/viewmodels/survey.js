@@ -1,29 +1,41 @@
-define(function() {
+define(function(require) {
     var router = require('plugins/router'),
-        rest = require('rest');
+        rest = require('rest'),
+        utils = require('utils');
 
     var ctor = function () {
         var _this = this;
         this.displayName = 'Survey';
-        this.survey = ko.mapping.fromJS({
+        var survey = ko.mapping.fromJS({
             id: "",
             name: "",
             questions: [],
             endTime: ""
         });
 
-        function activate(id){
+        this.survey = survey;
+
+        function activate(id) {
             return rest.surveys.get({
                 id: id,
                 selector: 'name,questions(name,answers(name)),endTime,surveyFeed(name)'
-            }).done(function(data){
-                ko.mapping.fromJS(data, {}, _this.survey);
+            }).done(function (data) {
+                ko.mapping.fromJS(data, {}, survey);
+
+                survey.name.subscribe(function (newValue) {
+                    var data = ko.mapping.toJS(survey);
+                    delete data.surveyFeed;
+
+                    return rest.surveys.update({
+                        data: data
+                    });
+                });
             });
         }
 
         this.activate = activate;
 
-        function addQuestion(survey){
+        function addQuestion(survey) {
             rest.questions.create({
                 selector: 'name,answers(name)',
                 data: {
@@ -33,8 +45,8 @@ define(function() {
                     },
                     answers: []
                 }
-            }).done(function(data){
-                var question = ko.mapping.fromJS( data);
+            }).done(function (data) {
+                var question = ko.mapping.fromJS(data);
                 survey.questions.push(question);
             });
         }
@@ -47,40 +59,47 @@ define(function() {
 
             rest.questions.delete({
                 data: ko.mapping.toJS(question)
-            }).done(function(data){
+            }).done(function (data) {
                 survey.questions.remove(question);
             });
         }
 
         this.removeQuestion = removeQuestion;
 
-        function addAnswer(question){
+        function addAnswer(question) {
             rest.answers.create({
                 selector: 'name',
                 data: {
                     name: "New Answer",
                     question: ko.mapping.toJS(question)
                 }
-            }).done(function(data){
+            }).done(function (data) {
                 question.answers.push(ko.mapping.fromJS(data));
             });
         }
 
         this.addAnswer = addAnswer;
 
-        function removeAnswer(answer,event) {
+        function removeAnswer(answer, event) {
             var context = ko.contextFor(event.target),
                 question = context.$parent;
 
             rest.answers.delete({
                 data: ko.mapping.toJS(answer)
-            }).done(function(data){
+            }).done(function (data) {
                 question.answers.remove(answer);
             });
         }
 
         this.removeAnswer = removeAnswer;
-    };
+
+        function selectName(element, index, data) {
+            var $element = $(element);
+            utils.selectElementContents($element.find('.name').get(0));
+        }
+
+        this.selectName = selectName;
+    }
 
     return ctor;
 });

@@ -44,7 +44,13 @@ public class SurveyController
     @RequestMapping(method = RequestMethod.PUT )
     public Survey update(@RequestBody Survey survey)
     {
-        survey =  surveyManager.save(survey);
+        Survey _existingSurvey = surveyManager.get(survey.getId());
+
+        _existingSurvey.setName( survey.getName() );
+        _existingSurvey.setActive( survey.isActive() );
+
+        survey =  surveyManager.save(_existingSurvey);
+
         return survey;
     }
 

@@ -30,6 +30,18 @@ public class AnswerController {
     }
 
     @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.PUT )
+    public Answer update(@RequestBody Answer answer)
+    {
+        Answer _existingAnswer = answerManager.get(answer.getId());
+
+        _existingAnswer.setName( answer.getName() );
+
+        answer =  answerManager.save(_existingAnswer);
+        return answer;
+    }
+
+    @Transactional( readOnly = false )
     @RequestMapping(method = RequestMethod.DELETE )
     @ResponseBody
     public boolean delete(@RequestBody Answer answer)

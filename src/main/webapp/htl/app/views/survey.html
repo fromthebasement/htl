@@ -2,24 +2,8 @@
     <a data-bind="attr: { href:'#surveyFeeds/' + surveyFeed.id()}"><i class="fa fa-arrow-left"></i> <span data-bind="text: surveyFeed.name"></span></a>
     <h2 data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></h2>
 
-    <div class="questions" data-bind="sortable: { data: questions, options: { handle: '.htl-sort-handle' } }">
-        <div class="question">
-            <span data-bind="text: $index() + 1 + '.'"></span>
-            <span class="icon-list">
-                <i class="fa fa-arrows-v htl-sort-handle"></i>
-                <i class="fa fa-trash-o htl-button" data-bind="click: $root.removeQuestion"></i>
-            </span>
-            <span data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></span>
-            <div class="answers" data-bind="sortable: { data: answers, options: { handle: '.htl-sort-handle' } }">
-                <div class="answer">
-                    <span class="icon-list">
-                        <i class="fa fa-arrows-v htl-sort-handle"></i>
-                        <i class="fa fa-trash-o htl-button" data-bind="click: $root.removeAnswer"></i>
-                    </span>
-                    <span data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></span>
-                </div>
-            </div>
-            <i class="fa fa-plus htl-button" data-bind="click: $root.addAnswer"></i>
+    <div class="questions" data-bind="sortable: { data: questions, options: { handle: '.htl-sort-handle' }, afterAdd: $root.selectName }">
+        <div data-bind="question: $data">
         </div>
     </div>
     <button data-bind="click: $root.addQuestion">Add Question</button>
