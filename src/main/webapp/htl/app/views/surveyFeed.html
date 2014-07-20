@@ -8,6 +8,12 @@
         <!-- /ko -->
     </div>
     <div>
+        <h3>Leagues</h3>
+        <!-- ko foreach: leagues -->
+        <div data-bind="text: name"></div>
+        <!-- /ko -->
+    </div>
+    <div>
         <h3>Surveys</h3>
         <!-- ko foreach: surveys -->
         <div data-bind="surveyRow: $data">

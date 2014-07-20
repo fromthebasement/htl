@@ -49,7 +49,7 @@ public class League extends BaseObject {
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "league", cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "league", cascade=CascadeType.ALL)
     public Set<LeaguePlayer> getLeaguePlayers() {
         return leaguePlayers;
     }

@@ -145,15 +145,7 @@
         <column>name</column>
         <row>
             <value description="id">1</value>
-            <value description="name">Golf Surveys</value>
-        </row>
-        <row>
-            <value description="id">2</value>
-            <value description="name">Baseball Surveys</value>
-        </row>
-        <row>
-            <value description="id">3</value>
-            <value description="name">Jeff's Poker Tournament</value>
+            <value description="name">HTL Survey Feed</value>
         </row>
     </table>
     <table name="user_survey_feed">
@@ -169,30 +161,6 @@
         </row>
         <row>
             <value description="survey_feed_id">1</value>
-            <value description="user_id">-4</value>
-        </row>
-        <row>
-            <value description="survey_feed_id">2</value>
-            <value description="user_id">-2</value>
-        </row>
-        <row>
-            <value description="survey_feed_id">2</value>
-            <value description="user_id">-3</value>
-        </row>
-        <row>
-            <value description="survey_feed_id">2</value>
-            <value description="user_id">-4</value>
-        </row>
-        <row>
-            <value description="survey_feed_id">3</value>
-            <value description="user_id">-2</value>
-        </row>
-        <row>
-            <value description="survey_feed_id">3</value>
-            <value description="user_id">-3</value>
-        </row>
-        <row>
-            <value description="survey_feed_id">3</value>
             <value description="user_id">-4</value>
         </row>
     </table>
@@ -239,6 +207,60 @@
             <value description="id">4</value>
             <value description="name">Green</value>
             <value description="question_id">1</value>
+        </row>
+    </table>
+    <table name="league">
+        <column>id</column>
+        <column>name</column>
+        <column>survey_feed_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Founders</value>
+            <value description="survey_feed_id">1</value>
+        </row>
+    </table>
+    <table name="player">
+        <column>id</column>
+        <column>name</column>
+        <column>user_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Jeff</value>
+            <value description="user_id">-2</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">Ryan</value>
+            <value description="user_id">-3</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="name">Matt</value>
+            <value description="user_id">-4</value>
+        </row>
+    </table>
+    <table name="league_player">
+        <column>id</column>
+        <column>commissioner</column>
+        <column>league_id</column>
+        <column>player_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="commissioner">true</value>
+            <value description="league_id">1</value>
+            <value description="player_id">1</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="commissioner">true</value>
+            <value description="league_id">1</value>
+            <value description="player_id">2</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="commissioner">true</value>
+            <value description="league_id">1</value>
+            <value description="player_id">3</value>
         </row>
     </table>
 </dataset>

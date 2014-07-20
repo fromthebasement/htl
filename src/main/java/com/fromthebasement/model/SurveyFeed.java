@@ -24,6 +24,7 @@ public class SurveyFeed extends BaseObject {
     private Tattoo          tattoo;
     private List<Survey>    surveys;
     private Set<User>       users = new HashSet<User>();
+    private Set<League>     leagues = new HashSet<League>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -73,6 +74,15 @@ public class SurveyFeed extends BaseObject {
     )
     public Set<User> getUsers() {
         return users;
+    }
+
+    @OneToMany(mappedBy = "surveyFeed", fetch = FetchType.LAZY)
+    public Set<League> getLeagues() {
+        return leagues;
+    }
+
+    public void setLeagues(Set<League> leagues) {
+        this.leagues = leagues;
     }
 
     /**

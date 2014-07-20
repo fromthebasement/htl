@@ -19,7 +19,7 @@ define(function() {
         function activate(id){
             rest.surveyFeeds.get({
                 id: id,
-                selector: 'surveys({0}),users(fullName)'.format(surveySelector)
+                selector: 'surveys({0}),users(fullName),leagues(name)'.format(surveySelector)
             }).done(function(data){
                 ko.mapping.fromJS(data, {}, _this.surveyFeed);
             });

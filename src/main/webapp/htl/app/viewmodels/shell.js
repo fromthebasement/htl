@@ -19,25 +19,25 @@
                 { route: 'logout', title:'Logout', moduleId: 'viewmodels/logout', nav: false, adminOnly: false }
             ];
 
-            getLeagues().done(function(data){
-                $.each(data, function(index, league){
-                    baseRouterMap.push( { route: 'league-' + league.id, title:league.name, moduleId: 'viewmodels/standings', nav: true, adminOnly: false, settings: { league: league } } )
-                });
+//            getLeagues().done(function(data){
+//                $.each(data, function(index, league){
+//                    baseRouterMap.push( { route: 'league-' + league.id, title:league.name, moduleId: 'viewmodels/standings', nav: true, adminOnly: false, settings: { league: league } } )
+//                });
 
                 router.map(baseRouterMap).buildNavigationModel();
 
-                router.activate().then(function(){
-                    $.ajaxSetup({
-                        statusCode: {
-                            401: function() {
-                                router.navigate('#login');
-                            }
+                $.ajaxSetup({
+                    statusCode: {
+                        401: function() {
+                            router.navigate('#login');
                         }
-                    });
+                    }
+                });
 
+                router.activate().then(function(){
                     deferred.resolve();
                 });
-            });
+//            });
 
             return deferred.promise();
         },
