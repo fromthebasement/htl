@@ -1,13 +1,16 @@
 <section style="padding: 15px;">
-    <!-- ko if: surveyFeeds().length === 0 -->
-        No survey feeds
+    <!-- ko if: surveyResponses().length === 0 -->
+        No survey responses
     <!-- /ko -->
 
-    <!-- ko foreach: surveyFeeds -->
+    <!-- ko foreach: surveyResponses -->
     <div>
-        <a data-bind="attr: { href : '#surveyFeeds/' + id},
-                      text: name">
-        </a>
+        <h3><a href="#" data-bind="text: survey.name"></a></h3>
+        <!-- ko with: leaguePlayer -->
+            <span>League: <!-- ko text: league.name --><!-- /ko --></span>
+            -
+            <span>Player: <!-- ko text: player.name --><!-- /ko --></span>
+        <!-- /ko -->
     </div>
     <!-- /ko -->
 </section>

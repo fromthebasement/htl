@@ -6,6 +6,8 @@ import com.fromthebasement.model.Person;
 import com.fromthebasement.model.Survey;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by jeffginn on 4/13/14.
  */

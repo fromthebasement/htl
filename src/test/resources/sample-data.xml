@@ -43,18 +43,18 @@
         </row>
         <row>
             <value description="id">-2</value>
-            <value description="username">admin</value>
+            <value description="username">infestedcoder@gmail.com</value>
             <value description="password">$2a$10$bH/ssqW8OhkTlIso9/yakubYODUOmh.6m5HEJvcBq3t3VdBh7ebqO</value>
-            <value description="first_name">Matt</value>
-            <value description="last_name">Raible</value>
+            <value description="first_name">Jeff</value>
+            <value description="last_name">Ginn</value>
             <value description="address"></value>
             <value description="city">Denver</value>
             <value description="country">US</value>
-            <value description="email">matt@raibledesigns.com</value>
+            <value description="email">infestedcoder@gmail.com</value>
             <value description="phone_number"></value>
             <value description="postal_code">80210</value>
             <value description="province">CO</value>
-            <value description="website">http://raibledesigns.com</value>
+            <value description="website">http://hometownleague.com</value>
             <value description="password_hint"><![CDATA[Not a female kitty.]]></value>
             <value description="version">1</value>
             <value description="account_enabled">1</value>
@@ -64,25 +64,67 @@
         </row>
         <row>
             <value description="id">-3</value>
-            <value description="username">two_roles_user</value>
+            <value description="username">mccannry@gmail.com</value>
             <value description="password">$2a$10$bH/ssqW8OhkTlIso9/yakubYODUOmh.6m5HEJvcBq3t3VdBh7ebqO</value>
-            <value description="first_name">Two Roles</value>
-            <value description="last_name">User</value>
+            <value description="first_name">Ryan</value>
+            <value description="last_name">McCann</value>
             <value description="address"></value>
             <value description="city">Denver</value>
             <value description="country">US</value>
-            <value description="email">two_roles_user@appfuse.org</value>
+            <value description="email">mccannry@gmail.com</value>
             <value description="phone_number"></value>
             <value description="postal_code">80210</value>
             <value description="province">CO</value>
-            <value description="website">http://raibledesigns.com</value>
+            <value description="website">http://hometownleague.com</value>
             <value description="password_hint"><![CDATA[Not a female kitty.]]></value>
             <value description="version">1</value>
             <value description="account_enabled">1</value>
             <value description="account_expired">0</value>
             <value description="account_locked">0</value>
             <value description="credentials_expired">0</value>
-        </row>        
+        </row>
+        <row>
+            <value description="id">-4</value>
+            <value description="username">mpen191@gmail.com</value>
+            <value description="password">$2a$10$bH/ssqW8OhkTlIso9/yakubYODUOmh.6m5HEJvcBq3t3VdBh7ebqO</value>
+            <value description="first_name">Matt</value>
+            <value description="last_name">Penridge</value>
+            <value description="address"></value>
+            <value description="city">Denver</value>
+            <value description="country">US</value>
+            <value description="email">mpen191@gmail.com</value>
+            <value description="phone_number"></value>
+            <value description="postal_code">80210</value>
+            <value description="province">CO</value>
+            <value description="website">http://hometownleague.com</value>
+            <value description="password_hint"><![CDATA[Not a female kitty.]]></value>
+            <value description="version">1</value>
+            <value description="account_enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
+        <row>
+            <value description="id">-5</value>
+            <value description="username">jeffginn@gmail.com</value>
+            <value description="password">$2a$10$CnQVJ9bsWBjMpeSKrrdDEeuIptZxXrwtI6CZ/OgtNxhIgpKxXeT9y</value>
+            <value description="first_name">Jeff</value>
+            <value description="last_name">User</value>
+            <value description="address"></value>
+            <value description="city">Denver</value>
+            <value description="country">US</value>
+            <value description="email">jeffginn@gmail.com</value>
+            <value description="phone_number"></value>
+            <value description="postal_code">80210</value>
+            <value description="province">CO</value>
+            <value description="website">http://hometownleague.com</value>
+            <value description="password_hint"><![CDATA[A male kitty.]]></value>
+            <value description="version">1</value>
+            <value description="account_enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
     </table>
     <table name="role">
         <column>id</column>
@@ -115,90 +157,131 @@
             <value description="role_id">-1</value>
         </row>
         <row>
+            <value description="user_id">-4</value>
+            <value description="role_id">-1</value>
+        </row>
+    </table>
+    <table name="survey_feed">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">HTL Survey Feed</value>
+        </row>
+    </table>
+    <table name="user_survey_feed">
+        <column>survey_feed_id</column>
+        <column>user_id</column>
+        <row>
+            <value description="survey_feed_id">1</value>
+            <value description="user_id">-2</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">1</value>
             <value description="user_id">-3</value>
-            <value description="role_id">-2</value>
+        </row>
+        <row>
+            <value description="survey_feed_id">1</value>
+            <value description="user_id">-4</value>
+        </row>
+    </table>
+    <table name="survey">
+        <column>id</column>
+        <column>name</column>
+        <column>survey_feed_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Week 1</value>
+            <value description="survey_feed_id">1</value>
+        </row>
+    </table>
+    <table name="question">
+        <column>id</column>
+        <column>name</column>
+        <column>survey_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">What is your favorite color?</value>
+            <value description="survey_id">1</value>
+        </row>
+    </table>
+    <table name="answer">
+        <column>id</column>
+        <column>name</column>
+        <column>question_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">Red</value>
+            <value description="question_id">1</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">Yellow</value>
+            <value description="question_id">1</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="name">Blue</value>
+            <value description="question_id">1</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="name">Green</value>
+            <value description="question_id">1</value>
         </row>
     </table>
     <table name="league">
         <column>id</column>
         <column>name</column>
+        <column>survey_feed_id</column>
         <row>
             <value description="id">1</value>
-            <value description="name">League 1</value>
-        </row>
-        <row>
-            <value description="id">2</value>
-            <value description="name">League 2</value>
+            <value description="name">Founders</value>
+            <value description="survey_feed_id">1</value>
         </row>
     </table>
     <table name="player">
         <column>id</column>
         <column>name</column>
+        <column>user_id</column>
         <row>
             <value description="id">1</value>
-            <value description="name">Andy</value>
+            <value description="name">Jeff</value>
+            <value description="user_id">-2</value>
         </row>
         <row>
             <value description="id">2</value>
-            <value description="name">Becky</value>
+            <value description="name">Ryan</value>
+            <value description="user_id">-3</value>
         </row>
         <row>
             <value description="id">3</value>
-            <value description="name">Dan</value>
-        </row>
-        <row>
-            <value description="id">4</value>
-            <value description="name">Grant</value>
-        </row>
-        <row>
-            <value description="id">5</value>
-            <value description="name">Ryan</value>
-        </row>
-        <row>
-            <value description="id">6</value>
             <value description="name">Matt</value>
-        </row>
-        <row>
-            <value description="id">7</value>
-            <value description="name">Jeff</value>
-        </row>
-        <row>
-            <value description="id">8</value>
-            <value description="name">Isabel</value>
+            <value description="user_id">-4</value>
         </row>
     </table>
     <table name="league_player">
+        <column>id</column>
+        <column>commissioner</column>
+        <column>league_id</column>
+        <column>player_id</column>
         <row>
+            <value description="id">1</value>
+            <value description="commissioner">true</value>
             <value description="league_id">1</value>
             <value description="player_id">1</value>
         </row>
         <row>
+            <value description="id">2</value>
+            <value description="commissioner">true</value>
             <value description="league_id">1</value>
             <value description="player_id">2</value>
         </row>
         <row>
+            <value description="id">3</value>
+            <value description="commissioner">true</value>
             <value description="league_id">1</value>
             <value description="player_id">3</value>
-        </row>
-        <row>
-            <value description="league_id">1</value>
-            <value description="player_id">4</value>
-        </row>
-        <row>
-            <value description="league_id">2</value>
-            <value description="player_id">5</value>
-        </row>
-        <row>
-            <value description="league_id">2</value>
-            <value description="player_id">6</value>
-        </row>
-        <row>
-            <value description="league_id">2</value>
-            <value description="player_id">7</value>
-        </row>
-        <row>
-            <value description="league_id">2</value>
-            <value description="player_id">8</value>
         </row>
     </table>
 </dataset>

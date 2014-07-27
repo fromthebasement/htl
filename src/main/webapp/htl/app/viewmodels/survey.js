@@ -18,7 +18,7 @@ define(function(require) {
         function activate(id) {
             return rest.surveys.get({
                 id: id,
-                selector: 'name,questions(name,answers(name)),endTime,surveyFeed(name)'
+                selector: 'name,questions(name,answers(name)),endTime,surveyFeed(name),active'
             }).done(function (data) {
                 ko.mapping.fromJS(data, {}, survey);
 

@@ -19,6 +19,11 @@ public class SurveyResponse extends BaseObject {
     private LeaguePlayer            leaguePlayer;
     private List<ConfidencePoint>   confidencePoints;
 
+    public SurveyResponse( Survey survey, LeaguePlayer leaguePlayer ) {
+        this.survey = survey;
+        this.leaguePlayer = leaguePlayer;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Core

@@ -222,12 +222,31 @@ define(function(require, exports, module) {
         }
     }
 
+    var surveyResponses = {
+        _urls: {
+            'getActive'    : '/api/v1/surveyResponses/active'
+        },
+
+        'getActive' : function(settings){
+            var url = urlBuilder.appendSelector( surveyResponses._urls.getActive, settings.selector );
+
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': url
+            });
+
+            return $.ajax(ajaxConfig);
+        }
+    }
+
     return {
         user: user,
         league: league,
         surveyFeeds: surveyFeeds,
         surveys: surveys,
         questions: questions,
-        answers: answers
+        answers: answers,
+        surveyResponses: surveyResponses
     };
 });
