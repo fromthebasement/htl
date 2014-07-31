@@ -1,5 +1,7 @@
 package com.fromthebasement.model;
 
+import org.skyscreamer.yoga.annotations.Core;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -24,6 +26,7 @@ public class LeaguePlayer {
     }
 
     @Id
+    @Core
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;

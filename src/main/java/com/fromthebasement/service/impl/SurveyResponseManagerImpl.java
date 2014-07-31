@@ -28,4 +28,9 @@ public class SurveyResponseManagerImpl extends GenericManagerImpl<SurveyResponse
     public List<SurveyResponse> getAllActive() {
         return surveyResponseDao.getAllActive(UserManagerImpl.getCurrentUser().getId());
     }
+
+    @Override
+    public SurveyResponse get(long leaguePlayerId, long surveyId) {
+        return surveyResponseDao.get(leaguePlayerId,surveyId);
+    }
 }

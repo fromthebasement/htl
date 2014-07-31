@@ -224,7 +224,19 @@ define(function(require, exports, module) {
 
     var surveyResponses = {
         _urls: {
+            'get'          : '/api/v1/surveyResponses/leaguePlayers/{0}/surveys/{1}',
             'getActive'    : '/api/v1/surveyResponses/active'
+        },
+
+        'get' : function(settings){
+            var url = urlBuilder.appendSelector( surveyResponses._urls.get.format(settings.leaguePlayerId,settings.surveyId), settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': url
+            });
+
+            return $.ajax(ajaxConfig);
         },
 
         'getActive' : function(settings){

@@ -1,0 +1,21 @@
+.surveyResponse .questions {
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.surveyResponse .question {
+    padding: 10px;
+    border-bottom: 1px solid;
+    font-size: 28px;
+}
+
+.surveyResponse .questions > .view-placeholder {
+    height: 100px;
+    padding: 10px;
+    border-bottom: 1px solid;
+}
+
+.surveyResponse .answer {
+    padding: 5px;
+    font-size: 14px;
+}

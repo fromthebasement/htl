@@ -26,4 +26,19 @@ public class SurveyResponseDaoTest extends BaseDaoTestCase {
         assertNotNull(surveyResponses);
         assertEquals(0,surveyResponses.size());
     }
+
+    @Test
+    public void testGet() throws Exception {
+        SurveyResponse surveyResponse = surveyResponseDao.get(1, 1);
+
+        assertNotNull(surveyResponse);
+
+        if( surveyResponse.getId() == null ) {
+            surveyResponseDao.save(surveyResponse);
+            surveyResponse = surveyResponseDao.get(1,1);
+        }
+
+        assertNotNull(surveyResponse);
+        assertNotNull(surveyResponse.getId());
+    }
 }

@@ -12,6 +12,7 @@
             var baseRouterMap = [
                 { route: '', title:'Home', moduleId: 'viewmodels/home', nav: true, adminOnly: false },
                 { route: 'surveyResponses', title:'Questions', moduleId: 'viewmodels/surveyResponses', nav: true, adminOnly: false },
+                { route: 'surveyResponses/leaguePlayers/:leaguePlayerId/surveys/:surveyId', title:'Survey Response', moduleId: 'viewmodels/surveyResponse', nav: false, adminOnly: false },
                 { route: 'surveyFeeds', title:'Survey Feeds', moduleId: 'viewmodels/surveyFeeds', nav: true, adminOnly: false },
                 { route: 'standings', title:'Standings', moduleId: 'viewmodels/standings', nav: false, adminOnly: false },
                 { route: 'surveyFeeds/:id', title:'Survey Feed', moduleId: 'viewmodels/surveyFeed', nav: false, adminOnly: false },

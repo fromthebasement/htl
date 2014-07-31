@@ -5,7 +5,10 @@
 
     <!-- ko foreach: surveyResponses -->
     <div>
-        <h3><a href="#" data-bind="text: survey.name"></a></h3>
+        <h3>
+            <a data-bind="text: survey.name,
+                          attr: { 'href' : '#surveyResponses/leaguePlayers/' + leaguePlayer.id + '/surveys/' + survey.id }"></a>
+        </h3>
         <!-- ko with: leaguePlayer -->
             <span>League: <!-- ko text: league.name --><!-- /ko --></span>
             -

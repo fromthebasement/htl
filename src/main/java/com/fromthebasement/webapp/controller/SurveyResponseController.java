@@ -24,6 +24,14 @@ public class SurveyResponseController
     private SurveyResponseManager surveyResponseManager;
 
     @Transactional( readOnly = true )
+    @RequestMapping(value = "/leaguePlayers/{leaguePlayerId}/surveys/{surveyId}", method = RequestMethod.GET )
+    public SurveyResponse get(@PathVariable("leaguePlayerId") long leaguePlayerId,
+                              @PathVariable("surveyId") long surveyId)
+    {
+        return surveyResponseManager.get( leaguePlayerId, surveyId );
+    }
+
+    @Transactional( readOnly = true )
     @RequestMapping(value = "{id}", method = RequestMethod.GET )
     public SurveyResponse get(@PathVariable("id") long id)
     {
@@ -35,13 +43,5 @@ public class SurveyResponseController
     public List<SurveyResponse> getActive()
     {
         return surveyResponseManager.getAllActive();
-    }
-
-    @Transactional( readOnly = false )
-    @RequestMapping(method = RequestMethod.POST )
-    public SurveyResponse create(@RequestBody SurveyResponse surveyResponse)
-    {
-        surveyResponse =  surveyResponseManager.realize(surveyResponse);
-        return surveyResponse;
     }
 }

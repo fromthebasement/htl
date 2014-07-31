@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface SurveyResponseDao extends GenericDao<SurveyResponse,Long> {
     public List<SurveyResponse> getAllActive(Long userId);
+
+    public SurveyResponse get(long leaguePlayerId, long surveyId);
 }
