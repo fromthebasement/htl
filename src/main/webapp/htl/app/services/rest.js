@@ -225,6 +225,7 @@ define(function(require, exports, module) {
     var surveyResponses = {
         _urls: {
             'get'          : '/api/v1/surveyResponses/leaguePlayers/{0}/surveys/{1}',
+            'save'         : '/api/v1/surveyResponses',
             'getActive'    : '/api/v1/surveyResponses/active'
         },
 
@@ -246,6 +247,18 @@ define(function(require, exports, module) {
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'GET',
                 'url': url
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'save' : function(settings) {
+            var url = urlBuilder.appendSelector( surveyResponses._urls.save, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'POST',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
             });
 
             return $.ajax(ajaxConfig);

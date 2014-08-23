@@ -1,7 +1,9 @@
 package com.fromthebasement.webapp.controller;
 
+import com.fromthebasement.model.Question;
 import com.fromthebasement.model.Survey;
 import com.fromthebasement.model.SurveyResponse;
+import com.fromthebasement.model.SurveyResponseForm;
 import com.fromthebasement.service.SurveyResponseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ public class SurveyResponseController
 
     @Transactional( readOnly = true )
     @RequestMapping(value = "/leaguePlayers/{leaguePlayerId}/surveys/{surveyId}", method = RequestMethod.GET )
-    public SurveyResponse get(@PathVariable("leaguePlayerId") long leaguePlayerId,
+    public SurveyResponseForm get(@PathVariable("leaguePlayerId") long leaguePlayerId,
                               @PathVariable("surveyId") long surveyId)
     {
         return surveyResponseManager.get( leaguePlayerId, surveyId );
@@ -43,5 +45,12 @@ public class SurveyResponseController
     public List<SurveyResponse> getActive()
     {
         return surveyResponseManager.getAllActive();
+    }
+
+    @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.POST )
+    public SurveyResponseForm save(@RequestBody SurveyResponseForm surveyResponseForm)
+    {
+        return surveyResponseManager.save( surveyResponseForm );
     }
 }

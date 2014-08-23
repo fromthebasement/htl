@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class ConfidencePoint {
     private Long            id;
     private SurveyResponse  surveyResponse;
+    private Question        question;
     private Answer          answer;
     private int             score;
 
@@ -33,6 +34,16 @@ public class ConfidencePoint {
 
     public void setSurveyResponse(SurveyResponse surveyResponse) {
         this.surveyResponse = surveyResponse;
+    }
+
+    @ManyToOne( fetch = FetchType.LAZY )
+    @JoinColumn(name="question_id")
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @ManyToOne( fetch = FetchType.LAZY )

@@ -2,6 +2,7 @@ package com.fromthebasement.service;
 
 import com.fromthebasement.model.SurveyFeed;
 import com.fromthebasement.model.SurveyResponse;
+import com.fromthebasement.model.SurveyResponseForm;
 import com.fromthebasement.model.User;
 
 import javax.ws.rs.GET;
@@ -15,5 +16,7 @@ import java.util.List;
 public interface SurveyResponseManager extends GenericManager<SurveyResponse,Long> {
     List<SurveyResponse> getAllActive();
 
-    SurveyResponse get(long leaguePlayerId, long surveyId);
+    SurveyResponseForm get(long leaguePlayerId, long surveyId);
+
+    SurveyResponseForm save(SurveyResponseForm surveyResponseForm);
 }

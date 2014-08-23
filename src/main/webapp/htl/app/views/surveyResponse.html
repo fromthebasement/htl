@@ -1,19 +1,19 @@
-<section class="surveyResponse" style="padding: 15px;" data-bind="with: surveyResponse">
+<section class="surveyResponse" style="padding: 15px;" data-bind="with: surveyResponseForm">
     <a data-bind="attr: { href: '#surveyResponses'}"><i class="fa fa-arrow-left"></i> <span>Questions</span></a>
-    <h2 data-bind="text: survey.name"></h2>
+    <h2 data-bind="text: surveyResponse.survey.name"></h2>
 
-    <div class="questions" data-bind="sortable: { data: survey.questions, options: { handle: '.htl-sort-handle' } }">
+    <div class="questions" data-bind="sortable: { data: entries, options: { handle: '.htl-sort-handle' } }">
         <div class="question">
             <span class="htl-sort-handle">
-                <span data-bind="text: $parent.survey.questions().length - $index() + '.'"></span>
+                <span data-bind="text: $parent.entries().length - $index() + '.'"></span>
                 <span class="icon-list">
                     <i class="fa fa-arrows-v"></i>
                 </span>
             </span>
-            <span class="name" data-bind="text: name"></span>
-            <div class="answers" data-bind="foreach: answers">
+            <span class="name" data-bind="text: question.name"></span>
+            <div class="answers" data-bind="foreach: question.answers">
                 <div class="answer">
-                    <input type="radio" data-bind="attr: { name : 'question' + $parent.id() }"/>
+                    <input type="radio" data-bind="attr: { value: id, name: 'question' + $parent.question.id() }, checked: $parent.answerId" />
                     <span class="name" data-bind="text: name"></span>
                 </div>
             </div>
