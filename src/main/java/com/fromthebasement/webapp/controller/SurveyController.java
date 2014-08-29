@@ -48,6 +48,7 @@ public class SurveyController
 
         _existingSurvey.setName( survey.getName() );
         _existingSurvey.setActive( survey.isActive() );
+        _existingSurvey.setEndTime( survey.getEndTime() );
 
         survey =  surveyManager.save(_existingSurvey);
 

@@ -27,4 +27,5 @@ define(function(require, exports, module){
     require('bindings/surveyRow');
     require('bindings/question');
     require('bindings/answer');
+    require('bindings/datetimepicker');
 });

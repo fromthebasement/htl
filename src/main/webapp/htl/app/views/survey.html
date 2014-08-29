@@ -1,6 +1,7 @@
 <section class="survey" style="padding: 15px;" data-bind="with: survey">
     <a data-bind="attr: { href:'#surveyFeeds/' + surveyFeed.id()}"><i class="fa fa-arrow-left"></i> <span data-bind="text: surveyFeed.name"></span></a>
     <h2 data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></h2>
+    Answers in by: <input id="datetimepicker" data-bind="datetimepicker: formattedDeadline" >
 
     <div class="questions" data-bind="sortable: { data: questions, options: { handle: '.htl-sort-handle' }, afterAdd: $root.selectName }">
         <div data-bind="question: $data">

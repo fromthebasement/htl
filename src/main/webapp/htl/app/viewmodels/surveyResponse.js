@@ -9,7 +9,7 @@ define(function(require) {
             surveyResponse: {
                 survey: {
                     name: "",
-                    endTime: ""
+                    deadline: ""
                 },
                 leaguePlayer: {
                     league: {
@@ -31,7 +31,7 @@ define(function(require) {
             return rest.surveyResponses.get({
                 leaguePlayerId: leaguePlayerId,
                 surveyId: surveyId,
-                selector: 'surveyResponse(leaguePlayer(league(id,name),player(id,name)),survey(name,endTime)),entries(question(name,answers(name,correct)),answerId,score)'
+                selector: 'surveyResponse(leaguePlayer(league(id,name),player(id,name)),survey(name,deadline)),entries(question(name,answers(name,correct)),answerId,score)'
             }).done(function (data) {
                 // Convert answerIds to strings so the knockout checked binding
                 // will show initial values
@@ -60,7 +60,7 @@ define(function(require) {
 
     function updateSurveyResponse(surveyResponseForm){
         return rest.surveyResponses.save({
-            selector: 'surveyResponse(leaguePlayer(league(id,name),player(id,name)),survey(name,endTime)),entries(question(name,answers(name,correct)),answerId,score)',
+            selector: 'surveyResponse(leaguePlayer(league(id,name),player(id,name)),survey(name,deadline)),entries(question(name,answers(name,correct)),answerId,score)',
             data: ko.mapping.toJS(surveyResponseForm)
         });
     }

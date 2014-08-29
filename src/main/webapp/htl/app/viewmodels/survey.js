@@ -1,7 +1,9 @@
 define(function(require) {
     var router = require('plugins/router'),
         rest = require('rest'),
-        utils = require('utils');
+        utils = require('utils'),
+        dateTimeFormatter = require('dateTimeFormatter');
+
 
     var ctor = function () {
         var _this = this;
@@ -10,26 +12,42 @@ define(function(require) {
             id: "",
             name: "",
             questions: [],
-            endTime: ""
+            deadline: ""
         });
 
         this.survey = survey;
 
+        var format = 'M/D/YY h:mma';
+
+        survey.formattedDeadline =  ko.computed({
+            read: function() {
+                return dateTimeFormatter.fromInterchangeDate(ko.unwrap(survey.deadline),{format:format});
+            },
+            write: function(value){
+                var interchangeDate = dateTimeFormatter.toInterchangeDate(value,{format:format});
+                survey.deadline(interchangeDate);
+            }
+        });
+
         function activate(id) {
             return rest.surveys.get({
                 id: id,
-                selector: 'name,questions(name,answers(name)),endTime,surveyFeed(name),active'
+                selector: 'name,questions(name,answers(name)),deadline,surveyFeed(name),active'
             }).done(function (data) {
                 ko.mapping.fromJS(data, {}, survey);
 
-                survey.name.subscribe(function (newValue) {
+                function updateSurvey(){
                     var data = ko.mapping.toJS(survey);
                     delete data.surveyFeed;
 
                     return rest.surveys.update({
-                        data: data
+                        data: data,
+                        selector: 'name,deadline'
                     });
-                });
+                }
+
+                survey.name.subscribe(updateSurvey);
+                survey.deadline.subscribe(updateSurvey);
             });
         }
 

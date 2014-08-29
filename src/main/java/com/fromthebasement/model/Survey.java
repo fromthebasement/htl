@@ -2,7 +2,6 @@ package com.fromthebasement.model;
 
 import javax.persistence.*;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.skyscreamer.yoga.annotations.Core;
@@ -59,6 +58,28 @@ public class Survey extends BaseObject {
 
     public void setEndTime(DateTime endTime) {
         this.endTime = endTime;
+    }
+
+    @Transient
+    public String getDeadline()
+    {
+        DateTime endTime = getEndTime();
+
+        if( endTime == null )
+            return null;
+
+        return endTime.toString();
+    }
+
+    public void setDeadline( String endTime )
+    {
+        DateTime _endTime;
+        if( endTime == null || endTime == "" )
+            _endTime = null;
+        else
+            _endTime = DateTime.parse( endTime );
+
+        setEndTime( _endTime );
     }
 
     @ManyToOne( fetch = FetchType.LAZY )
