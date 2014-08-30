@@ -1,7 +1,8 @@
-<input type="checkbox" data-bind="checked: active" />
+<!-- ko if: !active() -->
 <span class="icon-list">
     <i class="fa fa-trash-o htl-button" data-bind="click: $root.removeSurvey"></i>
 </span>
+<!-- /ko -->
 <a class="name"
    data-bind="attr: { href : '#surveys/' + id()},
                           text: name">

@@ -16,6 +16,7 @@ public class Question extends BaseObject {
     private Tattoo          tattoo;
     private Survey          survey;
     private List<Answer>    answers;
+    private Answer          correctAnswer;
 
     @Id
     @Core
@@ -63,6 +64,17 @@ public class Question extends BaseObject {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    @OneToOne
+    public Answer getCorrectAnswer()
+    {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer( Answer correctAnswer )
+    {
+        this.correctAnswer = correctAnswer;
     }
 
     @Override

@@ -13,7 +13,6 @@ public class Answer extends BaseObject {
     private Long        id;
     private String      name;
     private Tattoo      tattoo;
-    private boolean     isCorrect = false;
     private Question    question;
 
     @Id
@@ -53,15 +52,6 @@ public class Answer extends BaseObject {
 
     public void setQuestion(Question question) {
         this.question = question;
-    }
-
-    @Column(columnDefinition = "boolean default false")
-    public boolean isCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(boolean isCorrect) {
-        this.isCorrect = isCorrect;
     }
 
     @Override

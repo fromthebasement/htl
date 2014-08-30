@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api/v1/surveys")
-public class SurveyController
+public class SurveyController extends HTLController
 {
     @Autowired
     private SurveyManager surveyManager;
@@ -47,8 +47,20 @@ public class SurveyController
         Survey _existingSurvey = surveyManager.get(survey.getId());
 
         _existingSurvey.setName( survey.getName() );
-        _existingSurvey.setActive( survey.isActive() );
         _existingSurvey.setEndTime( survey.getEndTime() );
+
+        survey =  surveyManager.save(_existingSurvey);
+
+        return survey;
+    }
+
+    @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.PUT, value = "/publish")
+    public Survey activate(@RequestBody Survey survey)
+    {
+        Survey _existingSurvey = surveyManager.get(survey.getId());
+
+        _existingSurvey.setActive( survey.isActive());
 
         survey =  surveyManager.save(_existingSurvey);
 

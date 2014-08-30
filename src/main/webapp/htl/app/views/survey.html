@@ -1,11 +1,34 @@
 <section class="survey" style="padding: 15px;" data-bind="with: survey">
     <a data-bind="attr: { href:'#surveyFeeds/' + surveyFeed.id()}"><i class="fa fa-arrow-left"></i> <span data-bind="text: surveyFeed.name"></span></a>
-    <h2 data-bind="editableText: name" contenteditable="true" contenteditable-oneliner></h2>
-    Answers in by: <input id="datetimepicker" data-bind="datetimepicker: formattedDeadline" >
+    <h2 data-bind="editableText: name,
+                   attr: { contenteditable: $root.canEdit() }" contenteditable-oneliner></h2>
+    <!-- ko if: !$root.canEdit() -->
+    <div>
+        The survey is published and cannot be changed.
+        <div>
+            <button data-bind="click: $root.makeDraft">Make Draft</button>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div>
+        <p>Answers in by: <input id="datetimepicker" data-bind="datetimepicker: formattedDeadline" ></p>
+    </div>
+    <!-- ko if: $root.canEdit -->
+    <div>
+        <button data-bind="click: $root.publish">Publish</button>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: !$root.canEdit() -->
+    <div>
+        <p>Select the correct answer for each question:</p>
+    </div>
+    <!-- /ko -->
 
     <div class="questions" data-bind="sortable: { data: questions, options: { handle: '.htl-sort-handle' }, afterAdd: $root.selectName }">
         <div data-bind="question: $data">
         </div>
     </div>
+    <!-- ko if: $root.canEdit -->
     <button data-bind="click: $root.addQuestion">Add Question</button>
+    <!-- /ko -->
 </section>

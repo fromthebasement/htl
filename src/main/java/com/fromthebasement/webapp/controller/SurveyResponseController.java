@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api/v1/surveyResponses")
-public class SurveyResponseController
+public class SurveyResponseController extends HTLController
 {
     @Autowired
     private SurveyResponseManager surveyResponseManager;

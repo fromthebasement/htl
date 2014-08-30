@@ -82,6 +82,7 @@ define(function(require, exports, module) {
             'get'    : '/api/v1/surveys/{0}',
             'create' : '/api/v1/surveys',
             'update' : '/api/v1/surveys',
+            'publish': '/api/v1/surveys/publish',
             'delete' : '/api/v1/surveys'
         },
 
@@ -110,6 +111,18 @@ define(function(require, exports, module) {
 
         'update' : function(settings) {
             var url = urlBuilder.appendSelector( surveys._urls.update, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'PUT',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'publish' : function(settings) {
+            var url = urlBuilder.appendSelector( surveys._urls.publish, settings.selector );
 
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'PUT',

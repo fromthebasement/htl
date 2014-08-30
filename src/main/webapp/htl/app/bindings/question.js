@@ -20,6 +20,10 @@ define(function(require, exports, module) {
                 updateQuestion(question);
             });
 
+            question.correctAnswer.subscribe(function(newValue){
+                updateQuestion(question);
+            });
+
             // Insert the markup template
             $element.html( $(template) );
         }

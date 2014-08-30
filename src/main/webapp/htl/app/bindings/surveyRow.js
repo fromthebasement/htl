@@ -14,18 +14,8 @@ define(function(require, exports, module) {
 
             var survey = valueAccessor();
 
-            survey.active.subscribe(function(newValue){
-                updateSurvey(survey);
-            });
-
             // Insert the markup template
             $element.html( $(template) );
         }
     };
-
-    function updateSurvey(survey) {
-        return rest.surveys.update({
-            data: ko.mapping.toJS(survey)
-        });
-    }
 });

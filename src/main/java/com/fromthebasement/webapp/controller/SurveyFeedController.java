@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api/v1/surveyFeeds")
-public class SurveyFeedController
+public class SurveyFeedController extends HTLController
 {
     @Autowired
     private SurveyFeedManager surveyFeedManager;

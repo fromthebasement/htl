@@ -32,6 +32,7 @@ public class QuestionController {
         Question _existingQuestion = questionManager.get(question.getId());
 
         _existingQuestion.setName( question.getName() );
+        _existingQuestion.setCorrectAnswer( question.getCorrectAnswer() );
 
         question =  questionManager.save(_existingQuestion);
         return question;

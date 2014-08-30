@@ -2,7 +2,8 @@ define(function(require) {
     var router = require('plugins/router'),
         rest = require('rest'),
         utils = require('utils'),
-        dateTimeFormatter = require('dateTimeFormatter');
+        dateTimeFormatter = require('dateTimeFormatter'),
+        surveySelector = "name,questions(name,correctAnswer,answers(name)),deadline,surveyFeed(name),active";
 
 
     var ctor = function () {
@@ -12,10 +13,23 @@ define(function(require) {
             id: "",
             name: "",
             questions: [],
-            deadline: ""
+            deadline: "",
+            active: ""
         });
 
         this.survey = survey;
+
+        this.canEdit = ko.computed(function(){
+            return !survey.active();
+        });
+
+        this.publish = function(){
+            survey.active(true);
+        };
+
+        this.makeDraft = function(){
+            survey.active(false);
+        }
 
         var format = 'M/D/YY h:mma';
 
@@ -29,12 +43,51 @@ define(function(require) {
             }
         });
 
+        function mapSurveyData(data){
+            var mapping = {
+                'questions': {
+                    create: function (options) {
+                        return mapQuestion(options.data);
+                    }
+                }
+            };
+
+            ko.mapping.fromJS(data, mapping, survey);
+        }
+
+        function mapQuestion(data) {
+            data = $.extend({
+                name: "",
+                id: "",
+                answers: [],
+                correctAnswer: {
+                    id: ""
+                }
+            }, data);
+
+            var mapped = ko.mapping.fromJS(data);
+
+            var correctAnswer = mapped.correctAnswer;
+            if (correctAnswer.id()) {
+                $.each(mapped.answers(), function (index, answer) {
+                    if (answer.id() === correctAnswer.id()) {
+                        correctAnswer = answer;
+                        return false;
+                    }
+                })
+            }
+
+            mapped.correctAnswer = ko.observable(correctAnswer);
+
+            return mapped;
+        }
+
         function activate(id) {
             return rest.surveys.get({
                 id: id,
-                selector: 'name,questions(name,answers(name)),deadline,surveyFeed(name),active'
+                selector: surveySelector
             }).done(function (data) {
-                ko.mapping.fromJS(data, {}, survey);
+                mapSurveyData(data);
 
                 function updateSurvey(){
                     var data = ko.mapping.toJS(survey);
@@ -42,12 +95,24 @@ define(function(require) {
 
                     return rest.surveys.update({
                         data: data,
-                        selector: 'name,deadline'
-                    });
+                        selector: surveySelector
+                    }).done(mapSurveyData);
+                }
+
+                function publishSurvey(){
+                    var data = ko.mapping.toJS(survey);
+                    delete data.surveyFeed;
+
+                    return rest.surveys.publish({
+                        data: data,
+                        selector: surveySelector
+                    }).done(mapSurveyData);
                 }
 
                 survey.name.subscribe(updateSurvey);
                 survey.deadline.subscribe(updateSurvey);
+
+                survey.active.subscribe(publishSurvey);
             });
         }
 
@@ -64,7 +129,7 @@ define(function(require) {
                     answers: []
                 }
             }).done(function (data) {
-                var question = ko.mapping.fromJS(data);
+                var question = mapQuestion(data);
                 survey.questions.push(question);
             });
         }

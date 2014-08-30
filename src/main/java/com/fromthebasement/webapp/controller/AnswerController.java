@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/api/v1/answers")
-public class AnswerController {
+public class AnswerController extends HTLController {
     @Autowired
     AnswerManager answerManager;
 
