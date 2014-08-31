@@ -3,7 +3,13 @@ define(function(require, exports, module) {
         id: null,
         fullName: null,
         username: null,
-        roleList: []
+        roleList: [],
+        leaguePlayer: {
+            league: {
+                id: null
+            },
+            player: {}
+        }
     }
 
     //User state

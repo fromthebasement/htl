@@ -24,7 +24,8 @@ define(function(require, exports, module) {
         var data = ko.mapping.toJS(viewModel);
 
         rest.user.login({
-            data: data
+            data: data,
+            selector: "id,fullName,username,roleList,leaguePlayer(league(id,name),player(id,name))"
         }).done(function(data, status, xhr) {
             appViewModel.user(data);
 

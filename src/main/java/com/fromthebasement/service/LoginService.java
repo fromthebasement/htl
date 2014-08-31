@@ -10,7 +10,6 @@ import javax.ws.rs.Path;
 /**
  * Created by jeffginn on 4/7/14.
  */
-@Path("/login")
 public interface LoginService {
     @POST
     User login(LoginOptions loginOptions, HttpServletRequest request);

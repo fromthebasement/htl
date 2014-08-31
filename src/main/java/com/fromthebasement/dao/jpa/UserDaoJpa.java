@@ -1,6 +1,9 @@
 package com.fromthebasement.dao.jpa;
 
 import com.fromthebasement.dao.UserDao;
+import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
+import com.fromthebasement.model.SurveyResponse;
 import com.fromthebasement.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -83,5 +86,13 @@ public class UserDaoJpa extends GenericDaoJpa<User, Long> implements UserDao, Us
         Table table = AnnotationUtils.findAnnotation(User.class, Table.class);
         return jdbcTemplate.queryForObject(
                 "select password from " + table.name() + " where id=?", String.class, userId);
+    }
+
+    public List<LeaguePlayer> getAllLeaguePlayers(Long userId) {
+        Query query = getEntityManager().createQuery("select lp from LeaguePlayer lp inner join lp.player p where p.user.id = :userId");
+        query.setParameter("userId", userId);
+        List<LeaguePlayer> leaguePlayers = query.getResultList();
+
+        return leaguePlayers;
     }
 }

@@ -60,6 +60,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private boolean accountLocked;
     private boolean credentialsExpired;
     private Set<SurveyFeed> surveyFeeds = new HashSet<SurveyFeed>();
+    private LeaguePlayer leaguePlayer;
 
     /**
      * Default constructor - creates a new instance with no values set.
@@ -345,6 +346,15 @@ public class User extends BaseObject implements Serializable, UserDetails {
 
     public void setSurveyFeeds(Set<SurveyFeed> surveyFeeds) {
         this.surveyFeeds = surveyFeeds;
+    }
+
+    @Transient
+    public LeaguePlayer getLeaguePlayer() {
+        return leaguePlayer;
+    }
+
+    public void setLeaguePlayer(LeaguePlayer leaguePlayer) {
+        this.leaguePlayer = leaguePlayer;
     }
 
     /*

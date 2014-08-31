@@ -1,6 +1,8 @@
 package com.fromthebasement.service;
 
 import com.fromthebasement.dao.UserDao;
+import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
 import com.fromthebasement.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -137,4 +139,6 @@ public interface UserManager extends GenericManager<User, Long> {
      * @throws UserExistsException
      */
     User updatePassword(String username, String currentPassword, String recoveryToken, String newPassword, String applicationUrl) throws UserExistsException;
+
+    LeaguePlayer getDefaultLeaguePlayer( User user );
 }

@@ -1,11 +1,15 @@
 package com.fromthebasement.dao;
 
+import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
+import com.fromthebasement.model.SurveyResponse;
 import com.fromthebasement.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -45,4 +49,6 @@ public interface UserDao extends GenericDao<User, Long> {
      */
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     String getUserPassword(Long userId);
+
+    List<LeaguePlayer> getAllLeaguePlayers(Long userId);
 }

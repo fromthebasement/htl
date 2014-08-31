@@ -1,5 +1,7 @@
 package com.fromthebasement.service.impl;
 
+import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
 import com.fromthebasement.model.LoginOptions;
 import com.fromthebasement.model.User;
 import com.fromthebasement.security.HTLApp;
@@ -27,6 +29,11 @@ public class LoginServiceImpl implements LoginService {
     public User login(LoginOptions loginOptions, HttpServletRequest request) {
         htlApp.login( loginOptions, request );
         User user = UserManagerImpl.getCurrentUser();
-        return userManager.get( user.getId() );
+        user = userManager.get( user.getId() );
+
+        LeaguePlayer defaultLeaguePlayer = userManager.getDefaultLeaguePlayer(user);
+        user.setLeaguePlayer( defaultLeaguePlayer );
+
+        return user;
     }
 }

@@ -6,6 +6,7 @@ import com.fromthebasement.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,16 +19,18 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/api/v1/login")
-public class LoginController {
+public class LoginController extends HTLController {
 
     @Autowired
     private LoginService loginService;
 
     @Transactional( readOnly = false )
     @RequestMapping( method = RequestMethod.POST )
-    @ResponseBody
-    public User login(@RequestBody LoginOptions loginOptions, HttpServletRequest request)
+    public User login(@RequestBody LoginOptions loginOptions, HttpServletRequest request, Model model)
     {
-        return loginService.login( loginOptions, request );
+        // Clear the binding result from the model, necessary for yoga to serialize properly
+        model.asMap().clear();
+
+        return loginService.login(loginOptions,request);
     }
 }

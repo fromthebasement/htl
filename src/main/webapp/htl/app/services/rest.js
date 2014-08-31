@@ -15,9 +15,11 @@ define(function(require, exports, module) {
         },
 
         'login': function(settings){
+            var url = urlBuilder.appendSelector(user._urls.login, settings.selector);
+
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'POST',
-                'url': user._urls.login,
+                'url': url,
                 data: JSON.stringify(settings.data || "")
             });
 
@@ -27,8 +29,9 @@ define(function(require, exports, module) {
 
     var league = {
         _urls: {
-            'getAll' : '/services/api/leagues',
-            'players' : '/services/api/leagues/{0}/players'
+            'getAll' : '/api/v1/leagues',
+            'players' : '/api/v1/leagues/{0}/players',
+            'standings' : '/api/v1/leagues/{0}/standings'
         },
 
         'getAll' : function(settings){
@@ -47,8 +50,19 @@ define(function(require, exports, module) {
             });
 
             return $.ajax(ajaxConfig);
+        },
+
+        'getStandings' : function(settings){
+            var url = urlBuilder.appendSelector(league._urls.standings.format(settings.league.id), settings.selector);
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': url
+            });
+
+            return $.ajax(ajaxConfig);
         }
-    }
+    };
 
     var surveyFeeds = {
         _urls: {
@@ -276,7 +290,7 @@ define(function(require, exports, module) {
 
             return $.ajax(ajaxConfig);
         }
-    }
+    };
 
     return {
         user: user,

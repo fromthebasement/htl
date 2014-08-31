@@ -1,5 +1,7 @@
 package com.fromthebasement.dao;
 
+import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
 import com.fromthebasement.model.SurveyResponse;
 
 import java.util.List;

@@ -1,5 +1,7 @@
 package com.fromthebasement.service.impl;
 
+import com.fromthebasement.model.League;
+import com.fromthebasement.model.LeaguePlayer;
 import org.apache.commons.lang.StringUtils;
 import com.fromthebasement.dao.UserDao;
 import com.fromthebasement.model.User;
@@ -289,5 +291,14 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         }
 
         return currentUser;
+    }
+
+    @Override
+    public LeaguePlayer getDefaultLeaguePlayer(User user) {
+        List<LeaguePlayer> leaguePlayers = userDao.getAllLeaguePlayers(user.getId());
+        if (leaguePlayers == null || leaguePlayers.size() == 0)
+            return null;
+
+        return leaguePlayers.get(0);
     }
 }
