@@ -110,6 +110,20 @@ public class Survey extends BaseObject {
         this.isActive = isActive;
     }
 
+    @Transient
+    public boolean isClosed()
+    {
+        DateTime endTime = getEndTime();
+        if( endTime == null )
+            return false;
+
+        return endTime.isBeforeNow();
+    }
+
+    public void setClosed( boolean closed )
+    {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

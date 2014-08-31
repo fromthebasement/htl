@@ -9,7 +9,8 @@ define(function(require) {
             surveyResponse: {
                 survey: {
                     name: "",
-                    deadline: ""
+                    deadline: "",
+                    closed: ""
                 },
                 leaguePlayer: {
                     league: {
@@ -31,7 +32,7 @@ define(function(require) {
             return rest.surveyResponses.get({
                 leaguePlayerId: leaguePlayerId,
                 surveyId: surveyId,
-                selector: 'surveyResponse(leaguePlayer(league(id,name),player(id,name)),survey(name,deadline)),entries(question(name,correctAnswer,answers(name)),answerId,score)'
+                selector: 'surveyResponse(leaguePlayer(league(id,name),player(id,name)),survey(name,deadline,closed)),entries(question(name,correctAnswer,answers(name)),answerId,score)'
             }).done(function (data) {
                 // Convert answerIds to strings so the knockout checked binding
                 // will show initial values
