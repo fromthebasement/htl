@@ -60,15 +60,13 @@ define(function(require) {
                 name: "",
                 id: "",
                 answers: [],
-                correctAnswer: {
-                    id: ""
-                }
+                correctAnswer: null
             }, data);
 
             var mapped = ko.mapping.fromJS(data);
 
             var correctAnswer = mapped.correctAnswer;
-            if (correctAnswer.id()) {
+            if (ko.unwrap(correctAnswer) && correctAnswer.id()) {
                 $.each(mapped.answers(), function (index, answer) {
                     if (answer.id() === correctAnswer.id()) {
                         correctAnswer = answer;
