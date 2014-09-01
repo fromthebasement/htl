@@ -26,7 +26,7 @@ public class Answer extends BaseObject {
         this.id = id;
     }
 
-    @Column(length=50)
+    @Column(length=256)
     @Core
     public String getName() {
         return name;

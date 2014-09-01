@@ -29,7 +29,7 @@ public class Question extends BaseObject {
         this.id = id;
     }
 
-    @Column(length=50)
+    @Column(length=512)
     @Core
     public String getName() {
         return name;

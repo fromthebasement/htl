@@ -30,6 +30,7 @@
        },
        'jquery.ui': ['jquery'],
        'jquery.ui.touch-punch': ["jquery.ui"],
+       'jquery.datetimepicker': ['jquery'],
        'knockout': ["jquery"]
     }
 });
