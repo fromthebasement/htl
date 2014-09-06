@@ -6,7 +6,7 @@
 .surveyResponse .question {
     padding: 10px;
     border-bottom: 1px solid;
-    font-size: 28px;
+    font-size: 18px;
 }
 
 .surveyResponse .questions > .view-placeholder {
@@ -18,4 +18,5 @@
 .surveyResponse .answer {
     padding: 5px;
     font-size: 14px;
+    display: inline-block;
 }

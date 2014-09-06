@@ -1,0 +1,35 @@
+.home {
+    padding-left: 10px;
+}
+
+.home .note {
+    font-style: italic;
+}
+
+.home .link-buttons {
+    font-size: 28px;
+    padding-left: 0px;
+    padding-top: 15px;
+}
+
+.home .link-buttons > li {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.home .link-button {
+    font-size: 28px;
+    background-color: #e7e7e7;
+    text-align: center;
+    display: block;
+    width: 150px;
+    height: 80px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: black
+}
+
+.home .link-button:hover {
+    text-decoration: none;
+}

@@ -1,8 +1,18 @@
-<section>
-    <h2>Welcome to Hometown League</h2>
-    <ul data-bind="foreach: links">
+<section class="home">
+    <h3>Welcome to Hometown League</h3>
+    <div class="note">"My career was sputtering until I did a 360 and got headed in the right direction."</div>
+    <ul class="link-buttons">
         <li>
-            <a data-bind="attr: {href: href}, text: caption"></a>
+            <a class="link-button" href="#surveyResponses">
+                <i class="fa fa-list-ol"></i>
+                <div>Questions</div>
+            </a>
+        </li>
+        <li>
+            <a class="link-button" href="#standings">
+                <i class="fa fa-sitemap"></i>
+                <div>Standings</div>
+            </a>
         </li>
     </ul>
 </section>
