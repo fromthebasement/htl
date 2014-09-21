@@ -1,9 +1,7 @@
 package com.fromthebasement.service;
 
 import com.fromthebasement.model.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.ws.rs.*;
 import java.util.List;
 import java.util.Set;
 
@@ -17,5 +15,5 @@ public interface LeagueManager extends GenericManager<League, Long> {
 
     League create( League league );
 
-    Standings getStandings( Long id );
+    LeagueStandings getStandings( Long id );
 }

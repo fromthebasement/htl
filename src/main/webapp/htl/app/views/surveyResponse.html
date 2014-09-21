@@ -2,10 +2,28 @@
     <a data-bind="attr: { href: '#surveyResponses'}"><i class="fa fa-arrow-left"></i> <span>Questions</span></a>
     <h3 data-bind="text: surveyResponse.survey.name"></h3>
     <!-- ko if: surveyResponse.survey.closed -->
-    <h4><mark>Deadline passed</mark></h4>
+        <h4>Closed</h4>
+    <!-- /ko -->
+    <!-- ko if: surveyResponse.survey.deadline -->
+        <h5>Deadline: <span data-bind="dateTime: surveyResponse.survey.deadline"></span></h5>
+    <!-- /ko -->
+    <!-- ko if: !surveyResponse.survey.closed() -->
+    <h5 class="save-indicator">
+        <!-- ko if: $root.saving() === null -->
+        <span>Editing</span>
+        <!-- /ko -->
+        <!-- ko if: $root.saving -->
+        <span class="fa fa-spinner fa-spin"></span> <span>Saving</span>
+        <!-- /ko -->
+        <!-- ko if: $root.saving() === false -->
+        <span class="fa fa-check"></span> <span>Saved</span>
+        <!-- /ko -->
+    </h5>
     <!-- /ko -->
     <div class="questions" data-bind="sortable: { data: entries, options: { handle: '.htl-sort-handle' } }">
-        <div class="question">
+        <div class="question"
+             data-bind="css: { correct: question.correctAnswer && question.correctAnswer.id() == answerId(),
+                               incorrect: question.correctAnswer && question.correctAnswer.id() != answerId() }">
             <!-- ko if: !$root.surveyResponseForm.surveyResponse.survey.closed() -->
             <span class="htl-sort-handle">
                 <span data-bind="text: $parent.entries().length - $index() + '.'"></span>
@@ -16,7 +34,7 @@
             <!-- /ko -->
             <span class="name" data-bind="text: question.name"></span>
             <div class="answers" data-bind="foreach: question.answers">
-                <div class="answer">
+                <div class="answer" data-bind="css: { correct : $parent.question.correctAnswer && $parent.question.correctAnswer.id() == id()}">
                     <input type="radio"
                            data-bind="attr: { value: id,
                                               name: 'question' + $parent.question.id(),

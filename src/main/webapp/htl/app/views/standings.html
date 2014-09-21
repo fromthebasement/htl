@@ -1,3 +1,21 @@
-﻿<section style="padding-right: 15px; padding-left: 15px;">
-    <div data-bind="standings: {items:standings}"></div>
+﻿<section class="standings" style="padding-right: 15px; padding-left: 15px;">
+    <div class="overall-standings">
+        <!-- ko if: surveyStandings().length > 1 -->
+        <h3>Overall</h3>
+        <!-- /ko -->
+        <div data-bind="standings: {items:standings}"></div>
+    </div>
+    <!-- ko if: surveyStandings().length > 1 -->
+    <div class="survey-standings" data-bind="foreach: surveyStandings">
+        <div>
+            <h4>
+                <span data-bind="text: survey.name"></span>
+                <!-- ko if: survey.deadline -->
+                - <span data-bind="dateTime: survey.deadline"></span>
+                <!-- /ko -->
+            </h4>
+            <div data-bind="standings: {items: entries}"></div>
+        </div>
+    </div>
+    <!-- /ko -->
 </section>

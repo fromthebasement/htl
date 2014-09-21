@@ -1,9 +1,8 @@
 package com.fromthebasement.webapp.controller;
 
-import com.fromthebasement.model.Standings;
-import com.fromthebasement.model.Survey;
+import com.fromthebasement.model.LeagueStandings;
+import com.fromthebasement.model.SurveyStandings;
 import com.fromthebasement.service.LeagueManager;
-import com.fromthebasement.service.SurveyManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,7 @@ public class LeagueController extends HTLController {
 
     @Transactional( readOnly = true )
     @RequestMapping(value = "/{id}/standings", method = RequestMethod.GET )
-    public Standings get(@PathVariable("id") long id)
+    public LeagueStandings get(@PathVariable("id") long id)
     {
         return leagueManager.getStandings( id );
     }

@@ -1,4 +1,4 @@
-<section style="padding-left: 15px;">
+<section class="surveyResponses" style="padding-left: 15px;">
     <!-- ko if: surveyResponses().length === 0 -->
     <div style="padding: 15px;">
         No survey responses
@@ -7,14 +7,12 @@
 
     <!-- ko foreach: surveyResponses -->
     <div>
-        <h3>
+        <h4 class="survey-name">
             <a data-bind="text: survey.name,
                           attr: { 'href' : '#surveyResponses/leaguePlayers/' + leaguePlayer.id + '/surveys/' + survey.id }"></a>
-        </h3>
-        <!-- ko with: leaguePlayer -->
-            <span>League: <!-- ko text: league.name --><!-- /ko --></span>
-            -
-            <span>Player: <!-- ko text: player.name --><!-- /ko --></span>
+        </h4>
+        <!-- ko if: survey.deadline -->
+            <span data-bind="dateTime: survey.deadline"></span>
         <!-- /ko -->
     </div>
     <!-- /ko -->

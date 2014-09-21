@@ -1,3 +1,9 @@
+.surveyResponse .save-indicator {
+    border: 1px solid;
+    display: inline-block;
+    padding: 2px;
+}
+
 .surveyResponse .questions {
     margin-bottom: 10px;
     box-sizing: border-box;
@@ -19,4 +25,20 @@
     padding: 5px;
     font-size: 14px;
     display: inline-block;
+}
+
+.surveyResponse .question.correct:before {
+    content:  "\2713 ";
+    color: green;
+}
+
+.surveyResponse .question.incorrect:before {
+    content:  "x";
+    color: red;
+}
+
+.surveyResponse .answer.correct {
+    font-weight: bold;
+    background-color: rgb(243, 243, 194);
+    border-radius: 10px;
 }

@@ -26,6 +26,9 @@ define(function(require) {
 
         this.surveyResponseForm = surveyResponseForm;
 
+        var saving = ko.observable(null);
+        this.saving = saving;
+
         var initialized = false;
 
         function activate(leaguePlayerId,surveyId) {
@@ -43,27 +46,34 @@ define(function(require) {
                 ko.mapping.fromJS(data, {}, surveyResponseForm);
 
                 ko.computed(function(){
+                    ko.mapping.toJS(surveyResponseForm);
+                    saving(null);
+                });
+
+                ko.computed(function(){
                     if( !initialized ) {
                         // Subscribe to all observables in the survey response form
                         ko.mapping.toJS(surveyResponseForm);
                         initialized = true;
                     }
                     else {
-                        updateSurveyResponse(ko.mapping.toJS(surveyResponseForm));
+                        saving(true);
+                        updateSurveyResponse(ko.mapping.toJS(surveyResponseForm)).done(function(data){
+                            saving(false);
+                        })
                     }
-
                 }).extend({ throttle: 2000 });
             });
         }
 
         this.activate = activate;
-    }
+    };
 
     function updateSurveyResponse(surveyResponseForm){
         return rest.surveyResponses.save({
             selector: 'surveyResponse(leaguePlayer(league(id,name),player(id,name)),survey(name,deadline)),entries(question(name,correctAnswer,answers(name)),answerId,score)',
             data: ko.mapping.toJS(surveyResponseForm)
-        });
+        })
     }
 
     return ctor;

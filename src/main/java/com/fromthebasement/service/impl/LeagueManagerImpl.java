@@ -7,7 +7,6 @@ import com.fromthebasement.model.*;
 import com.fromthebasement.service.LeagueManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
 
@@ -61,38 +60,52 @@ public class LeagueManagerImpl extends GenericManagerImpl<League, Long> implemen
         return leaguePlayer;
     }
 
-    public Standings getStandings( Long id )
+    public LeagueStandings getStandings( Long id )
     {
         List<SurveyResponse> surveyResponses = leagueDao.getAllCompleteSurveyResponses( id );
 
-        Map<LeaguePlayer,Integer> scores = new HashMap<>();
+        // Compute a score for each response and group responses by survey
+        Map<Survey, Map<LeaguePlayer,Integer>> scoresBySurvey = new HashMap<>();
 
         for( SurveyResponse surveyResponse : surveyResponses )
         {
             LeaguePlayer leaguePlayer = surveyResponse.getLeaguePlayer();
-            int score = 0;
-            if( scores.containsKey( leaguePlayer ) ) {
-                score = scores.get( leaguePlayer );
+            Survey survey = surveyResponse.getSurvey();
+
+            if( !scoresBySurvey.containsKey( survey ) ) {
+                scoresBySurvey.put( survey, new HashMap<LeaguePlayer, Integer>() );
             }
 
-            score += getScore( surveyResponse );
-
-            scores.put( leaguePlayer, score );
+            Map<LeaguePlayer,Integer> scores = scoresBySurvey.get( survey );
+            scores.put( leaguePlayer, getScore( surveyResponse ) );
         }
 
-        Standings standings = new Standings();
+        // Create a standings object for each survey and add it to total standings
+        LeagueStandings leagueStandings = new LeagueStandings();
 
-        for( Iterator<Map.Entry<LeaguePlayer,Integer>> entries = scores.entrySet().iterator(); entries.hasNext();  )
+        for( Iterator<Map.Entry<Survey, Map<LeaguePlayer,Integer>>> it = scoresBySurvey.entrySet().iterator(); it.hasNext(); )
         {
-            Map.Entry<LeaguePlayer,Integer> entry = entries.next();
-            StandingsEntry standingsEntry = new StandingsEntry();
-            standingsEntry.setLeaguePlayer( entry.getKey() );
-            standingsEntry.setScore( entry.getValue() );
+            Map.Entry<Survey, Map<LeaguePlayer,Integer>> entry = it.next();
+            Survey survey = entry.getKey();
+            Map<LeaguePlayer,Integer> scores = entry.getValue();
 
-            standings.addEntry( standingsEntry );
+            SurveyStandings surveyStandings = new SurveyStandings();
+            surveyStandings.setSurvey( survey );
+
+            for( Iterator<Map.Entry<LeaguePlayer,Integer>> entries = scores.entrySet().iterator(); entries.hasNext();  )
+            {
+                Map.Entry<LeaguePlayer,Integer> playerEntry = entries.next();
+                StandingsEntry standingsEntry = new StandingsEntry();
+                standingsEntry.setLeaguePlayer( playerEntry.getKey() );
+                standingsEntry.setScore( playerEntry.getValue() );
+
+                surveyStandings.addEntry( standingsEntry );
+            }
+
+            leagueStandings.addSurveyStandings( surveyStandings.sort() );
         }
 
-        return standings.sort();
+        return leagueStandings.sort();
     }
 
     public int getScore( SurveyResponse surveyResponse )

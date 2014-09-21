@@ -28,4 +28,5 @@ define(function(require, exports, module){
     require('bindings/question');
     require('bindings/answer');
     require('bindings/datetimepicker');
+    require('bindings/dateTime');
 });

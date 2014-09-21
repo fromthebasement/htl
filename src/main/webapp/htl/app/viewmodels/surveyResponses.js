@@ -9,7 +9,7 @@ define(function(require) {
 
         function activate(){
             rest.surveyResponses.getActive({
-                selector: "leaguePlayer(league(name),player(name)),survey(name)"
+                selector: "leaguePlayer(league(name),player(name)),survey(name,deadline)"
             }).done(function(data){
                 surveyResponses(data);
             });

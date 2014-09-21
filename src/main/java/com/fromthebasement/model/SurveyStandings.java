@@ -2,12 +2,23 @@ package com.fromthebasement.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by jeffginn on 8/30/14.
  */
-public class Standings {
+public class SurveyStandings {
+    private Survey survey;
     private ArrayList<StandingsEntry> entries = new ArrayList<StandingsEntry>();
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
 
     public ArrayList<StandingsEntry> getEntries() {
         return entries;
@@ -22,7 +33,7 @@ public class Standings {
         this.entries.add( entry );
     }
 
-    public Standings sort()
+    public SurveyStandings sort()
     {
         Collections.sort(getEntries(), new StandingsEntryComparator() );
         return this;

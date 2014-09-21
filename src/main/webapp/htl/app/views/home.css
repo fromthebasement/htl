@@ -6,6 +6,11 @@
     font-style: italic;
 }
 
+.home .note a {
+    color: black;
+}
+
+
 .home .link-buttons {
     font-size: 28px;
     padding-left: 0px;
