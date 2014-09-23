@@ -1,7 +1,6 @@
 define(function(require, exports, module) {
     var router = require('plugins/router'),
         appViewModel = require('appViewModel'),
-        shell = require('viewmodels/shell'),
         rest = require('rest');
 
     var model = {
@@ -15,8 +14,7 @@ define(function(require, exports, module) {
         },
         viewModel = $.extend( _viewModel, _extended);
 
-    function activate(redirect){
-        viewModel.redirectURL = redirect;
+    function activate(){
     }
 
     function login(evt) {
@@ -29,8 +27,11 @@ define(function(require, exports, module) {
         }).done(function(data, status, xhr) {
             appViewModel.user(data);
 
-            if( viewModel.redirectURL )  {
-                router.navigate(viewModel.redirectURL);
+            var redirectURL = viewModel.redirectURL;
+            viewModel.redirectURL = null;
+
+            if( redirectURL )  {
+                router.navigate(redirectURL);
             }
             else {
                 router.navigate('#');

@@ -28,12 +28,6 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public User login(LoginOptions loginOptions, HttpServletRequest request) {
         htlApp.login( loginOptions, request );
-        User user = UserManagerImpl.getCurrentUser();
-        user = userManager.get( user.getId() );
-
-        LeaguePlayer defaultLeaguePlayer = userManager.getDefaultLeaguePlayer(user);
-        user.setLeaguePlayer( defaultLeaguePlayer );
-
-        return user;
+        return userManager.getCurrentUserWithDefaultLeaguePlayer();
     }
 }

@@ -13,17 +13,13 @@
 
         function activate(){
             var league = appViewModel.user().leaguePlayer.league;
-            if( !ko.unwrap(league.id) )
-                router.navigate('#login');
-            else {
-                rest.league.getStandings({
-                    league: ko.mapping.toJS(league),
-                    selector: 'entries(score,leaguePlayer(id,player(id,name))),surveyStandings(survey(name,deadline),entries(score,leaguePlayer(id,player(id,name))))'
-                }).done(function (data) {
-                    standings(data.entries);
-                    surveyStandings(data.surveyStandings);
-                });
-            }
+            return rest.league.getStandings({
+                league: ko.mapping.toJS(league),
+                selector: 'entries(score,leaguePlayer(id,player(id,name))),surveyStandings(survey(name,deadline),entries(score,leaguePlayer(id,player(id,name))))'
+            }).done(function (data) {
+                standings(data.entries);
+                surveyStandings(data.surveyStandings);
+            });
         }
 
         this.activate = activate;

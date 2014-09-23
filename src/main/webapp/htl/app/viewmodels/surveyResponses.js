@@ -8,7 +8,7 @@ define(function(require) {
         this.surveyResponses = surveyResponses;
 
         function activate(){
-            rest.surveyResponses.getActive({
+            return rest.surveyResponses.getActive({
                 selector: "leaguePlayer(league(name),player(name)),survey(name,deadline)"
             }).done(function(data){
                 surveyResponses(data);

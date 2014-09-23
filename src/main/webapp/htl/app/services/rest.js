@@ -11,7 +11,8 @@ define(function(require, exports, module) {
 
     var user = {
         _urls: {
-            'login' : '/api/v1/login'
+            'login' : '/api/v1/login',
+            'user' : '/api/v1/user'
         },
 
         'login': function(settings){
@@ -21,6 +22,17 @@ define(function(require, exports, module) {
                 'type': 'POST',
                 'url': url,
                 data: JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'get': function(settings){
+            var url = urlBuilder.appendSelector(user._urls.user, settings.selector);
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': url
             });
 
             return $.ajax(ajaxConfig);

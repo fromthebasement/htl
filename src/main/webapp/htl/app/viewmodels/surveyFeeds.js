@@ -8,7 +8,7 @@ define(function() {
         this.surveyFeeds = surveyFeeds;
 
         function activate(){
-            rest.surveyFeeds.getAll().done(function(data){
+            return rest.surveyFeeds.getAll().done(function(data){
                 surveyFeeds(data);
             });
         }

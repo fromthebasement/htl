@@ -2,7 +2,8 @@
     var router = require('plugins/router'),
         app = require('durandal/app'),
         appViewModel = require('appViewModel'),
-        rest = require('rest');
+        rest = require('rest'),
+        login = require('viewmodels/login');
 
     return {
         router: router,
@@ -21,25 +22,24 @@
                 { route: 'logout', title:'Logout', moduleId: 'viewmodels/logout', nav: false, adminOnly: false }
             ];
 
-//            getLeagues().done(function(data){
-//                $.each(data, function(index, league){
-//                    baseRouterMap.push( { route: 'league-' + league.id, title:league.name, moduleId: 'viewmodels/standings', nav: true, adminOnly: false, settings: { league: league } } )
-//                });
+            router.map(baseRouterMap).buildNavigationModel();
 
-                router.map(baseRouterMap).buildNavigationModel();
+            $.ajaxSetup({
+                statusCode: {
+                    401: function() {
+                        if( !login.redirectURL )
+                            login.redirectURL = window.location.hash;
 
-                $.ajaxSetup({
-                    statusCode: {
-                        401: function() {
+                        if( !router.activeInstruction() || router.activeInstruction().fragment !== 'login' )
                             router.navigate('#login');
-                        }
                     }
-                });
+                }
+            });
 
-                router.activate().then(function(){
-                    deferred.resolve();
-                });
-//            });
+            router.activate().then(function(){
+                getCurrentUser();
+                deferred.resolve();
+            });
 
             return deferred.promise();
         },
@@ -47,7 +47,11 @@
         appViewModel: appViewModel
     };
 
-    function getLeagues() {
-        return rest.league.getAll();
+    function getCurrentUser() {
+        return rest.user.get({
+            selector: "id,fullName,username,roleList,leaguePlayer(league(id,name),player(id,name))"
+        }).done(function(data){
+            appViewModel.user(data);
+        });
     }
 });

@@ -141,4 +141,6 @@ public interface UserManager extends GenericManager<User, Long> {
     User updatePassword(String username, String currentPassword, String recoveryToken, String newPassword, String applicationUrl) throws UserExistsException;
 
     LeaguePlayer getDefaultLeaguePlayer( User user );
+
+    User getCurrentUserWithDefaultLeaguePlayer();
 }

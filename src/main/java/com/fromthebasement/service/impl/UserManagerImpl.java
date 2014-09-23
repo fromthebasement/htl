@@ -301,4 +301,15 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
 
         return leaguePlayers.get(0);
     }
+
+    public User getCurrentUserWithDefaultLeaguePlayer()
+    {
+        User user = getCurrentUser();
+        user = get( user.getId() );
+
+        LeaguePlayer defaultLeaguePlayer = getDefaultLeaguePlayer(user);
+        user.setLeaguePlayer( defaultLeaguePlayer );
+
+        return user;
+    }
 }
