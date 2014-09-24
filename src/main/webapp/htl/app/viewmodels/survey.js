@@ -29,7 +29,7 @@ define(function(require) {
 
         this.makeDraft = function(){
             survey.active(false);
-        }
+        };
 
         var format = 'M/D/YY h:mma';
 

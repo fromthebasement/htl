@@ -1,13 +1,14 @@
 define(function() {
     var router = require('plugins/router'),
         rest = require('rest'),
-        surveySelector = 'name,active';
+        surveySelector = 'name,active',
+        surveyFeedSelector = 'surveys({0}),users(fullName),leagues(name)'.format(surveySelector)
 ;
     var ctor = function () {
         var _this = this;
         this.displayName = 'Survey Feed';
 
-        this.surveyFeed = ko.mapping.fromJS({
+        var surveyFeed = ko.mapping.fromJS({
             id: "",
             name: "",
             users: [],
@@ -15,13 +16,27 @@ define(function() {
             surveys: []
         });
 
-        this.surveyFeed.surveys.valueHasMutated()
+        this.surveyFeed = surveyFeed;
+
+        this.surveyFeed.surveys.valueHasMutated();
         function activate(id){
             rest.surveyFeeds.get({
                 id: id,
-                selector: 'surveys({0}),users(fullName),leagues(name)'.format(surveySelector)
+                selector: surveyFeedSelector
             }).done(function(data){
                 ko.mapping.fromJS(data, {}, _this.surveyFeed);
+
+                function updateSurveyFeed(){
+                    var data = ko.mapping.toJS(surveyFeed);
+
+                    return rest.surveyFeeds.update({
+                        data: data
+                    }).done(function(data){
+                        ko.mapping.fromJS(data,{},_this.surveyFeed)
+                    });
+                }
+
+                surveyFeed.name.subscribe(updateSurveyFeed);
             });
         }
 

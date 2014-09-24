@@ -17,7 +17,6 @@ import java.util.Set;
  * Created by jeffginn on 4/15/14.
  */
 @Entity
-@URITemplate("/surveyFeeds/{id}")
 public class SurveyFeed extends BaseObject {
     private Long            id;
     private String          name;

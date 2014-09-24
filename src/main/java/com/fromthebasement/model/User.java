@@ -147,6 +147,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
      * @return firstName + ' ' + lastName
      */
     @Transient
+    @JsonIgnore
     public String getFullName() {
         return firstName + ' ' + lastName;
     }

@@ -79,7 +79,9 @@ define(function(require, exports, module) {
     var surveyFeeds = {
         _urls: {
             'get'       : '/api/v1/surveyFeeds/{0}',
-            'getAll'    : '/api/v1/surveyFeeds'
+            'getAll'    : '/api/v1/surveyFeeds',
+            'create'    : '/api/v1/surveyFeeds',
+            'update'    : '/api/v1/surveyFeeds'
         },
 
         'getAll' : function(settings){
@@ -100,8 +102,32 @@ define(function(require, exports, module) {
             });
 
             return $.ajax(ajaxConfig);
+        },
+
+        'create' : function(settings) {
+            var url = urlBuilder.appendSelector( surveyFeeds._urls.create, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'POST',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'update' : function(settings) {
+            var url = urlBuilder.appendSelector( surveyFeeds._urls.update, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'PUT',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
         }
-    }
+    };
 
     var surveys = {
         _urls: {

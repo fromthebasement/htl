@@ -1,4 +1,4 @@
-<section style="padding: 15px;">
+<section class="survey-feeds" style="padding: 15px;">
     <!-- ko if: surveyFeeds().length === 0 -->
         No survey feeds
     <!-- /ko -->
@@ -10,4 +10,8 @@
         </a>
     </div>
     <!-- /ko -->
+
+    <div>
+        <button data-bind="click: $root.addSurveyFeed">New Survey Feed</button>
+    </div>
 </section>

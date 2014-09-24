@@ -7,6 +7,18 @@ define(function() {
         var surveyFeeds = ko.observableArray();
         this.surveyFeeds = surveyFeeds;
 
+        function addSurveyFeed(){
+            rest.surveyFeeds.create({
+                data: {
+                    name: "New Survey Feed"
+                }
+            }).done(function(data){
+                surveyFeeds.push(data);
+            });
+        }
+
+        this.addSurveyFeed = addSurveyFeed;
+
         function activate(){
             return rest.surveyFeeds.getAll().done(function(data){
                 surveyFeeds(data);
