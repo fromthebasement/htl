@@ -1,5 +1,10 @@
 @import "../app/views/views.css";
 
+/*Prevent iOS zoom when selecting input by making font-size 16px*/
+input {
+    font-size: 16px;
+}
+
 .htl-button {
     cursor: pointer;
 }
