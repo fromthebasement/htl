@@ -1,8 +1,8 @@
 define(function(require){
     "use strict";
 
-    require('knockout');
-    var dateTimeFormatter = require('dateTimeFormatter');
+    var ko = require('knockout'),
+        dateTimeFormatter = require('dateTimeFormatter');
 
 
     ko.bindingHandlers.dateTime = {

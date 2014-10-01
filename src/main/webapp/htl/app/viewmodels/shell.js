@@ -15,7 +15,7 @@
                 { route: 'surveyResponses', title:'Questions', moduleId: 'viewmodels/surveyResponses', nav: true, adminOnly: false },
                 { route: 'surveyResponses/leaguePlayers/:leaguePlayerId/surveys/:surveyId', title:'Survey Response', moduleId: 'viewmodels/surveyResponse', nav: false, adminOnly: false },
                 { route: 'standings', title:'Standings', moduleId: 'viewmodels/standings', nav: true, adminOnly: false },
-                { route: 'surveyFeeds', title:'Survey Feeds', moduleId: 'viewmodels/surveyFeeds', nav: true, adminOnly: false },
+                { route: 'surveyFeeds', title:'Survey Feeds', moduleId: 'viewmodels/surveyFeeds', nav: true, adminOnly: true },
                 { route: 'surveyFeeds/:id', title:'Survey Feed', moduleId: 'viewmodels/surveyFeed', nav: false, adminOnly: false },
                 { route: 'surveys/:id', title:'Survey', moduleId: 'viewmodels/survey', nav: false, adminOnly: false },
                 { route: 'login(:/redirect)', title:'Login', moduleId: 'viewmodels/login', nav: false, adminOnly: false },
