@@ -14,7 +14,7 @@ import java.util.List;
  * Created by jeffginn on 7/26/14.
  */
 public interface SurveyResponseManager extends GenericManager<SurveyResponse,Long> {
-    List<SurveyResponse> getAllActive();
+    List<SurveyResponse> getAllActive(long leagueId);
 
     SurveyResponseForm get(long leaguePlayerId, long surveyId);
 

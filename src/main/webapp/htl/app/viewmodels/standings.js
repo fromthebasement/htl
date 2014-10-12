@@ -1,7 +1,6 @@
 ﻿define(function() {
     var router = require('plugins/router'),
-        rest = require('rest'),
-        appViewModel = require('appViewModel');
+        rest = require('rest');
 
     var ctor = function () {
         this.displayName = 'Competing!';
@@ -12,16 +11,12 @@
         this.surveyStandings = surveyStandings;
 
         function activate(leagueID){
-            var league;
-            if( !leagueID )
-                league = appViewModel.user().leaguePlayer().league;
-            else
-                league = {
-                    id: leagueID
-                };
+            var league = {
+                id: leagueID
+            };
 
             return rest.league.getStandings({
-                league: ko.mapping.toJS(league),
+                league: league,
                 selector: 'entries(score,leaguePlayer(id,player(id,name))),surveyStandings(survey(name,deadline),entries(score,leaguePlayer(id,player(id,name))))'
             }).done(function (data) {
                 standings(data.entries);

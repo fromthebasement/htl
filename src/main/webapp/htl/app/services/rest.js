@@ -221,7 +221,7 @@ define(function(require, exports, module) {
 
             return $.ajax(ajaxConfig);
         }
-    }
+    };
 
     var questions = {
         _urls: {
@@ -266,7 +266,7 @@ define(function(require, exports, module) {
 
             return $.ajax(ajaxConfig);
         }
-    }
+    };
 
     var answers = {
         _urls: {
@@ -310,13 +310,13 @@ define(function(require, exports, module) {
 
             return $.ajax(ajaxConfig);
         }
-    }
+    };
 
     var surveyResponses = {
         _urls: {
             'get'          : '/api/v1/surveyResponses/leaguePlayers/{0}/surveys/{1}',
             'save'         : '/api/v1/surveyResponses',
-            'getActive'    : '/api/v1/surveyResponses/active'
+            'getActive'    : '/api/v1/surveyResponses/leagues/{0}/active'
         },
 
         'get' : function(settings){
@@ -331,8 +331,7 @@ define(function(require, exports, module) {
         },
 
         'getActive' : function(settings){
-            var url = urlBuilder.appendSelector( surveyResponses._urls.getActive, settings.selector );
-
+            var url = urlBuilder.appendSelector( surveyResponses._urls.getActive.format(settings.league.id), settings.selector );
 
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'GET',

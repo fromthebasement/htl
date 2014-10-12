@@ -18,9 +18,10 @@ public class SurveyResponseDaoJpa extends GenericDaoJpa<SurveyResponse,Long> imp
         super(SurveyResponse.class);
     }
 
-    public List<SurveyResponse> getAllActive(Long userId) {
-        Query query = getEntityManager().createQuery("select new SurveyResponse(s,lp) from LeaguePlayer lp inner join lp.player p inner join lp.league l inner join l.surveyFeed sf inner join sf.surveys s where p.user.id = :userId and s.active = true");
+    public List<SurveyResponse> getAllActive(long userId, long leagueId) {
+        Query query = getEntityManager().createQuery("select new SurveyResponse(s,lp) from LeaguePlayer lp inner join lp.player p inner join lp.league l inner join l.surveyFeed sf inner join sf.surveys s where p.user.id = :userId and s.active = true and l.id = :leagueId");
         query.setParameter("userId", userId);
+        query.setParameter("leagueId", leagueId);
         List<SurveyResponse> surveyResponses = query.getResultList();
 
         return surveyResponses;

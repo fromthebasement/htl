@@ -7,8 +7,13 @@ define(function(require) {
         var surveyResponses = ko.observableArray();
         this.surveyResponses = surveyResponses;
 
-        function activate(){
+        function activate(leagueID){
+            var league = {
+                id: leagueID
+            };
+
             return rest.surveyResponses.getActive({
+                league: league,
                 selector: "leaguePlayer(league(name),player(name)),survey(name,deadline)"
             }).done(function(data){
                 surveyResponses(data);

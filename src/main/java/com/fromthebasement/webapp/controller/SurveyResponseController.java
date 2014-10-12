@@ -41,10 +41,10 @@ public class SurveyResponseController extends HTLController
     }
 
     @Transactional( readOnly = true )
-    @RequestMapping( value="/active", method = RequestMethod.GET )
-    public List<SurveyResponse> getActive()
+    @RequestMapping( value="/leagues/{leagueId}/active", method = RequestMethod.GET )
+    public List<SurveyResponse> getActive(@PathVariable("leagueId") long leagueId)
     {
-        return surveyResponseManager.getAllActive();
+        return surveyResponseManager.getAllActive(leagueId);
     }
 
     @Transactional( readOnly = false )

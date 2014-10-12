@@ -33,8 +33,8 @@ public class SurveyResponseManagerImpl extends GenericManagerImpl<SurveyResponse
     }
 
     @Override
-    public List<SurveyResponse> getAllActive() {
-        List<SurveyResponse> surveyResponses = surveyResponseDao.getAllActive(UserManagerImpl.getCurrentUser().getId());
+    public List<SurveyResponse> getAllActive(long leagueId) {
+        List<SurveyResponse> surveyResponses = surveyResponseDao.getAllActive(UserManagerImpl.getCurrentUser().getId(), leagueId);
         Collections.sort( surveyResponses, new SurveyResponseComparator() );
         return surveyResponses;
     }
