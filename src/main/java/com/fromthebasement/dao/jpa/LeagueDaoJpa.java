@@ -24,7 +24,7 @@ public class LeagueDaoJpa extends GenericDaoJpa<League, Long> implements LeagueD
      */
     public List<SurveyResponse> getAllCompleteSurveyResponses(Long leagueId)
     {
-        TypedQuery<SurveyResponse> query = getEntityManager().createQuery("select sr from SurveyResponse sr inner join sr.leaguePlayer lp WHERE lp.league.id = :leagueId and sr.survey.active = true", SurveyResponse.class );
+        TypedQuery<SurveyResponse> query = getEntityManager().createQuery("select sr from SurveyResponse sr inner join sr.leaguePlayer lp WHERE lp.league.id = :leagueId and sr.survey.active = true and sr.survey.surveyFeed = lp.league.surveyFeed", SurveyResponse.class );
         query.setParameter( "leagueId", leagueId );
 
         return query.getResultList();

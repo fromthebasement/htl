@@ -81,7 +81,8 @@ define(function(require, exports, module) {
             'get'       : '/api/v1/surveyFeeds/{0}',
             'getAll'    : '/api/v1/surveyFeeds',
             'create'    : '/api/v1/surveyFeeds',
-            'update'    : '/api/v1/surveyFeeds'
+            'update'    : '/api/v1/surveyFeeds',
+            'archive'   : '/api/v1/surveyFeeds/archive'
         },
 
         'getAll' : function(settings){
@@ -118,6 +119,18 @@ define(function(require, exports, module) {
 
         'update' : function(settings) {
             var url = urlBuilder.appendSelector( surveyFeeds._urls.update, settings.selector );
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'PUT',
+                'url': url,
+                'data': JSON.stringify(settings.data || "")
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'archive' : function(settings) {
+            var url = urlBuilder.appendSelector( surveyFeeds._urls.archive, settings.selector );
 
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'PUT',

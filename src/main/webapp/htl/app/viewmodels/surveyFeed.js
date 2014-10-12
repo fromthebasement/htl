@@ -2,7 +2,7 @@ define(function() {
     var router = require('plugins/router'),
         rest = require('rest'),
         surveySelector = 'name,active',
-        surveyFeedSelector = 'surveys({0}),users(fullName),leagues(name)'.format(surveySelector)
+        surveyFeedSelector = 'archived,surveys({0}),users(fullName),leagues(name)'.format(surveySelector)
 ;
     var ctor = function () {
         var _this = this;
@@ -13,10 +13,21 @@ define(function() {
             name: "",
             users: [],
             leagues: [],
-            surveys: []
+            surveys: [],
+            archived: false
         });
 
         this.surveyFeed = surveyFeed;
+
+        function updateSurveyFeed(){
+            var data = ko.mapping.toJS(surveyFeed);
+
+            return rest.surveyFeeds.update({
+                data: data
+            }).done(function(data){
+                ko.mapping.fromJS(data,{},surveyFeed)
+            });
+        }
 
         this.surveyFeed.surveys.valueHasMutated();
         function activate(id){
@@ -25,17 +36,6 @@ define(function() {
                 selector: surveyFeedSelector
             }).done(function(data){
                 ko.mapping.fromJS(data, {}, _this.surveyFeed);
-
-                function updateSurveyFeed(){
-                    var data = ko.mapping.toJS(surveyFeed);
-
-                    return rest.surveyFeeds.update({
-                        data: data
-                    }).done(function(data){
-                        ko.mapping.fromJS(data,{},_this.surveyFeed)
-                    });
-                }
-
                 surveyFeed.name.subscribe(updateSurveyFeed);
             });
         }
@@ -70,6 +70,36 @@ define(function() {
         }
 
         this.removeSurvey = removeSurvey;
+
+        function archiveSurveyFeed(archive){
+            var data = ko.mapping.toJS(surveyFeed);
+
+            data.archived = archive;
+
+            return rest.surveyFeeds.archive({
+                data: data,
+                selector: 'archived'
+            }).done(function(data){
+                ko.mapping.fromJS(data,{},surveyFeed)
+            });
+        }
+
+        function archive(surveyFeed) {
+            if( surveyFeed.archived() )
+                return;
+
+            return archiveSurveyFeed(true);
+        }
+
+        function makeActive(surveyFeed) {
+            if( !surveyFeed.archived() )
+                return;
+
+            return archiveSurveyFeed(false);
+        }
+
+        this.archive = archive;
+        this.makeActive = makeActive;
     };
 
     return ctor;

@@ -1,6 +1,19 @@
 <section class="survey-feed" style="padding: 15px;" data-bind="with: surveyFeed">
     <a href="#surveyFeeds"><i class="fa fa-arrow-left"></i> Survey Feeds</a>
     <h2 data-bind="editableText: name" contenteditable contenteditable-oneliner></h2>
+    <!-- ko if: archived -->
+    <div>
+        This survey feed is archived.
+        <div>
+            <button data-bind="click: $root.makeActive">Make Active</button>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: !archived() -->
+    <div>
+        <button data-bind="click: $root.archive">Archive</button>
+    </div>
+    <!-- /ko -->
     <div>
         <h3>Authors</h3>
         <!-- ko foreach: users -->

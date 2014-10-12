@@ -63,4 +63,17 @@ public class SurveyFeedController extends HTLController
 
         return surveyFeed;
     }
+
+    @Transactional( readOnly = false )
+    @RequestMapping(method = RequestMethod.PUT, value = "/archive" )
+    public SurveyFeed archive(@RequestBody SurveyFeed surveyFeed)
+    {
+        SurveyFeed _existing = surveyFeedManager.get(surveyFeed.getId());
+
+        _existing.setArchived( surveyFeed.isArchived() );
+
+        surveyFeed =  surveyFeedManager.save(_existing);
+
+        return surveyFeed;
+    }
 }

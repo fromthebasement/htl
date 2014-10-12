@@ -24,6 +24,7 @@ public class SurveyFeed extends BaseObject {
     private List<Survey>    surveys;
     private Set<User>       users = new HashSet<User>();
     private Set<League>     leagues = new HashSet<League>();
+    private boolean         isArchived = false;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -82,6 +83,15 @@ public class SurveyFeed extends BaseObject {
 
     public void setLeagues(Set<League> leagues) {
         this.leagues = leagues;
+    }
+
+    @Column(columnDefinition = "boolean default false")
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean isArchived) {
+        this.isArchived = isArchived;
     }
 
     /**
