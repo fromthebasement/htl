@@ -1,19 +1,18 @@
 <section class="home">
-    <h3>Welcome to Hometown League</h3>
+    <h3>
+        <span>Hometown League</span>
+        <!-- ko with: leaguePlayer -->
+        <span>- <!-- ko text: league.name --><!-- /ko --></span>
+        <!-- /ko -->
+    </h3>
     <div class="note">
         "My career was sputtering until I did a 360 and got headed in the right direction." - <a href="http://en.wikipedia.org/wiki/Tracy_McGrady" target="_blank">Tracy McGrady</a>
     </div>
-    <ul class="link-buttons">
+    <ul class="link-buttons" data-bind="foreach: linkButtons">
         <li>
-            <a class="link-button" href="#surveyResponses">
-                <i class="fa fa-list-ol"></i>
-                <div>Questions</div>
-            </a>
-        </li>
-        <li>
-            <a class="link-button" href="#standings">
-                <i class="fa fa-sitemap"></i>
-                <div>Standings</div>
+            <a class="link-button" data-bind="attr: { href: href }">
+                <i data-bind="css: buttonClass"></i>
+                <div data-bind="text: caption">Questions</div>
             </a>
         </li>
     </ul>

@@ -1,5 +1,6 @@
 package com.fromthebasement.webapp.controller;
 
+import com.fromthebasement.model.LeaguePlayer;
 import com.fromthebasement.model.LoginOptions;
 import com.fromthebasement.model.User;
 import com.fromthebasement.service.LoginService;
@@ -8,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by jeffginn on 6/1/14.
@@ -27,5 +30,11 @@ public class UserController extends HTLController {
     public User getInfo()
     {
         return userManager.getCurrentUserWithDefaultLeaguePlayer();
+    }
+
+    @RequestMapping( method = RequestMethod.GET, value="/{id}/leaguePlayers" )
+    public List<LeaguePlayer> getLeaguePlayers(@PathVariable("id") long id)
+    {
+        return userManager.getLeaguePlayers(id);
     }
 }

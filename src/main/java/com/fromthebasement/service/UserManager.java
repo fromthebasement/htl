@@ -143,4 +143,6 @@ public interface UserManager extends GenericManager<User, Long> {
     LeaguePlayer getDefaultLeaguePlayer( User user );
 
     User getCurrentUserWithDefaultLeaguePlayer();
+
+    List<LeaguePlayer> getLeaguePlayers(long id);
 }

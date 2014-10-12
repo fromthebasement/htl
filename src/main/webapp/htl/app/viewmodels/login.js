@@ -23,9 +23,9 @@ define(function(require, exports, module) {
 
         rest.user.login({
             data: data,
-            selector: "id,fullName,username,roleList,leaguePlayer(league(id,name),player(id,name))"
+            selector: "id,fullName,username,roleList(value),leaguePlayer(league(id,name),player(id,name))"
         }).done(function(data, status, xhr) {
-            appViewModel.user(data);
+            appViewModel.setUser(data);
 
             var redirectURL = viewModel.redirectURL;
             viewModel.redirectURL = null;

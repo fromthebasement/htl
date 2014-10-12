@@ -22,11 +22,26 @@
                 <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
                     <!-- ko if: !adminOnly || $root.appViewModel.isAdmin() -->
                     <li data-bind="css: { active: isActive }">
-                        <a data-bind="attr: { href: hash }, html: title" class="collapse-on-select"></a>
+                        <a data-bind="attr: { href: $root.buildHref(hash) }, html: title" class="collapse-on-select"></a>
                     </li>
                     <!-- /ko -->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <!-- ko if: appViewModel.user().leaguePlayers().length > 1 -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span data-bind="text: appViewModel.user().leaguePlayer().league.name"></span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" data-bind="foreach: appViewModel.user().leaguePlayers">
+                                <!-- ko if: $parent.appViewModel.user().leaguePlayer().id !== id -->
+                                <li>
+                                    <a href="#" data-bind="click: $parent.appViewModel.setLeaguePlayer, text: league.name"></a>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                        </li>
+                    <!-- /ko -->
                     <!-- ko if: !appViewModel.user().id -->
                         <li><a href="#login" class="collapse-on-select">Login</a></li>
                     <!-- /ko -->

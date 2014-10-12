@@ -11,8 +11,15 @@
         var surveyStandings = ko.observableArray();
         this.surveyStandings = surveyStandings;
 
-        function activate(){
-            var league = appViewModel.user().leaguePlayer.league;
+        function activate(leagueID){
+            var league;
+            if( !leagueID )
+                league = appViewModel.user().leaguePlayer().league;
+            else
+                league = {
+                    id: leagueID
+                };
+
             return rest.league.getStandings({
                 league: ko.mapping.toJS(league),
                 selector: 'entries(score,leaguePlayer(id,player(id,name))),surveyStandings(survey(name,deadline),entries(score,leaguePlayer(id,player(id,name))))'

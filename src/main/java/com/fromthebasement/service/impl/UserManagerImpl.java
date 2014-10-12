@@ -295,13 +295,14 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
 
     @Override
     public LeaguePlayer getDefaultLeaguePlayer(User user) {
-        List<LeaguePlayer> leaguePlayers = userDao.getAllLeaguePlayers(user.getId());
+        List<LeaguePlayer> leaguePlayers = getLeaguePlayers(user.getId());
         if (leaguePlayers == null || leaguePlayers.size() == 0)
             return null;
 
         return leaguePlayers.get(0);
     }
 
+    @Override
     public User getCurrentUserWithDefaultLeaguePlayer()
     {
         User user = getCurrentUser();
@@ -311,5 +312,11 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         user.setLeaguePlayer( defaultLeaguePlayer );
 
         return user;
+    }
+
+    @Override
+    public List<LeaguePlayer> getLeaguePlayers(long id)
+    {
+        return userDao.getAllLeaguePlayers(id);
     }
 }

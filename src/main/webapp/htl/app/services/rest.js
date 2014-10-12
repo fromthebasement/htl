@@ -11,8 +11,9 @@ define(function(require, exports, module) {
 
     var user = {
         _urls: {
-            'login' : '/api/v1/login',
-            'user' : '/api/v1/user'
+            'login': '/api/v1/login',
+            'get': '/api/v1/user',
+            'leaguePlayers': '/api/v1/user/{0}/leaguePlayers'
         },
 
         'login': function(settings){
@@ -28,7 +29,18 @@ define(function(require, exports, module) {
         },
 
         'get': function(settings){
-            var url = urlBuilder.appendSelector(user._urls.user, settings.selector);
+            var url = urlBuilder.appendSelector(user._urls.get, settings.selector);
+
+            var ajaxConfig = $.extend( defaultAjaxConfig, {
+                'type': 'GET',
+                'url': url
+            });
+
+            return $.ajax(ajaxConfig);
+        },
+
+        'getLeaguePlayers': function(settings){
+            var url = urlBuilder.appendSelector(user._urls.leaguePlayers.format(settings.id), settings.selector);
 
             var ajaxConfig = $.extend( defaultAjaxConfig, {
                 'type': 'GET',

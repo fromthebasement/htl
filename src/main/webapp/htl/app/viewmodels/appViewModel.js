@@ -4,13 +4,14 @@ define(function(require, exports, module) {
         fullName: null,
         username: null,
         roleList: [],
-        leaguePlayer: {
+        leaguePlayer: ko.observable({
             league: {
                 id: null
             },
             player: {}
-        }
-    }
+        }),
+        leaguePlayers: ko.observableArray([])
+    };
 
     //User state
     var _viewModel = {
@@ -39,8 +40,23 @@ define(function(require, exports, module) {
         return isAdmin;
     });
 
+    function setUser(user) {
+        var _user = $.extend({}, emptyUser, user);
+        if( !ko.isObservable(user.leaguePlayer))
+            _user.leaguePlayer = ko.observable(_user.leaguePlayer);
+
+        _viewModel.user(_user);
+    }
+
+    function setLeaguePlayer(leaguePlayer,evt){
+        _viewModel.user().leaguePlayer(leaguePlayer);
+        return true;
+    }
+
     return $.extend(_viewModel, {
         isAdmin: isAdmin,
-        reset: reset
+        reset: reset,
+        setUser: setUser,
+        setLeaguePlayer: setLeaguePlayer
     });
 });
