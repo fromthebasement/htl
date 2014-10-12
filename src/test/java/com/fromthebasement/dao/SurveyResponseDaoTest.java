@@ -22,7 +22,7 @@ public class SurveyResponseDaoTest extends BaseDaoTestCase {
 
     @Test
     public void testGetAllActive() throws Exception {
-        List<SurveyResponse> surveyResponses = surveyResponseDao.getAllActive(-2L);
+        List<SurveyResponse> surveyResponses = surveyResponseDao.getAllActive(-2L,1);
         assertNotNull(surveyResponses);
         assertEquals(0,surveyResponses.size());
     }
